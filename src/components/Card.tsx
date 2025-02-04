@@ -36,7 +36,7 @@ const CardComponent = () => {
                 <p className="text-sm font-light text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti laboriosam facere sint fugiat vitae vel quam</p>
             </div>
             <div className="flex items-center justify-between">
-                <span className="text-2xl font-bold text-tertiary dark:text-white">$599</span>
+                <span className="text-2xl font-bold text-primary dark:text-white">$599</span>
                 <a
                     href="#"
                     className="rounded-lg hover:bg-tertiary px-5 py-2.5 text-center text-sm font-medium text-white bg-primary focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"

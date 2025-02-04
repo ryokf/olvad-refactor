@@ -13,7 +13,7 @@ const Order = () => {
                 <p className='text-center text-red-500 font-semibold mb-2'>Hurry to take of the offer!!!</p>
                 <Button theme={buttonTheme} color='failure' className='!w-full mt-4 font-bold'>Order Now!!!</Button>
             </div>
-            <Carousel className="w-full" leftControl="<" rightControl=">">
+            <Carousel className="w-full" indicators={false} pauseOnHover>
                 <CardComponent></CardComponent>
                 <CardComponent></CardComponent>
                 <CardComponent></CardComponent>
