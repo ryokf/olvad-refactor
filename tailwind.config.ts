@@ -1,18 +1,29 @@
 import type { Config } from "tailwindcss";
+import {content, plugin} from "flowbite-react/tailwind";
 
 export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    content(),
   ],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: {
+          'DEFAULT': '#675D50',
+        },
+        secondary: {
+          'DEFAULT': '#A9907E',
+        },
+        tertiary: {
+          'DEFAULT': '#ABC4AA',
+        }
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(),
+  ],
 } satisfies Config;
