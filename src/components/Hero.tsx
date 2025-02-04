@@ -37,7 +37,7 @@ const Hero = () => {
 
     return (
         <div className="lg:max-w-6xl 2xl:max-w-7xl w-11/12 mx-auto min-h-screen">
-            <h1 ref={outlineTextRef} className="text-[6rem] top-12 lg:text-[18rem] text-outline absolute -z-10 lg:top-6 -left-1/4">Dreamofhappiness</h1>
+            {/* <h1 ref={outlineTextRef} className="text-[6rem] top-12 lg:text-[18rem] text-outline absolute -z-10 lg:top-6 -left-1/4 ">Dreamofhappiness</h1> */}
             <div className="pt-10 lg:pt-0 grid grid-cols-1 grid-rows-2 md:grid-rows-1 md:grid-cols-2 items-stretch max-h-screen">
                 <div ref={headTextRef} className="flex flex-col items-start justify-center md:h-screen">
                     <h1 className={`${poppins.className} text-5xl text-center lg:text-left lg:text-8xl font-bold text-primary`}>Feel The <span className={`${sourGummy.className} font-bold text-tertiary`}>Happiness</span> In Every Bite</h1>
