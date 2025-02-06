@@ -1,17 +1,17 @@
 
 "use client";
 
+import footerTheme from "@/themes/footer";
 import { Footer } from "flowbite-react";
 import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
 
 const FooterComponent = () => {
     return (
-        <Footer container className="bg-tertiary/50">
+        <Footer theme={footerTheme} container className="">
             <div className="w-full">
                 <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
                     <div >
                         <Footer.Brand
-                            className="text-primary"
                             href="/"
                             src="/logo.png"
                             alt="Olvad Logo"
