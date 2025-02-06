@@ -1,6 +1,6 @@
 import { Button, Carousel } from 'flowbite-react'
 import React from 'react'
-import CardComponent from './Card';
+import CardComponent from '../Card';
 import buttonTheme from '@/themes/button';
 
 const Order = () => {

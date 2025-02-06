@@ -1,13 +1,15 @@
-import FooterComponent from "@/components/Footer";
-import Hero from "@/components/Hero";
-import Order from "@/components/Order";
+import About from "@/components/Home/About";
+import Hero from "@/components/Home/Hero";
+import Order from "@/components/Home/Order";
+import Reviews from "@/components/Home/Reviews";
 
 export default function Home() {
   return (
     <>
       <Hero />
       <Order></Order>
-      <FooterComponent></FooterComponent>
+      <About></About>
+      <Reviews></Reviews>
     </>
   );
 }

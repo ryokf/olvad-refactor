@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { poppins } from "../themes/fonts";
 import "./globals.css";
 import NavbarComponent from "@/components/Navbar";
+import FooterComponent from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,6 +21,7 @@ export default function RootLayout({
       >
         <NavbarComponent></NavbarComponent>
         {children}
+        <FooterComponent></FooterComponent>
       </body>
     </html>
   );
