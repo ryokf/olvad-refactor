@@ -1,9 +1,34 @@
+'use client'
+
 import { Button, Carousel } from 'flowbite-react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CardComponent from '../Card';
 import buttonTheme from '@/themes/button';
+import { supabase } from '@/config/db';
 
 const Order = () => {
+    interface Product {
+        id: number;
+        name: string;
+        category_id: number;
+        price: number;
+        description: string;
+        photo: string;
+    }
+
+    const [products, setProducts] = useState<Product[] | null>([]);
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
+    const fetchProducts = async () => {
+        const { data } = await supabase.from("products").select();
+        setProducts(data);
+    };
+
+    console.log(products)
+    
     return (
         <div className="grid grid-cols-1 w-10/12 mx-auto min-h-screen">
             <div className="">
