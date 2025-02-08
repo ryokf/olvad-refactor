@@ -2,7 +2,7 @@ import { CustomFlowbiteTheme } from "flowbite-react"
 
 const cardTheme: CustomFlowbiteTheme["card"] = {
     "root": {
-        "base": "flex bg-black rounded-lg border border-gray-200 shadow-md dark:border-gray-700 dark:bg-gray-800",
+        "base": "flex rounded-lg border border-gray-200 shadow-md dark:border-gray-700 dark:bg-gray-800",
         "children": "flex h-full flex-col justify-center gap-2 p-2",
         "horizontal": {
             "off": "flex-col",

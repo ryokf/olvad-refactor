@@ -8,23 +8,19 @@ import Image from "next/image";
 export function NavbarComponent() {
     const navLink = [
         {
-            name: "Home",
-            href: "#"
-        },
-        {
-            name: "About",
-            href: "#"
-        },
-        {
-            name: "Services",
-            href: "#"
-        },
-        {
-            name: "Contact",
+            name: "Beranda",
             href: "#"
         },
         {
             name: "Menu",
+            href: "#"
+        },
+        {
+            name: "Keranjang",
+            href: "#"
+        },
+        {
+            name: "Masuk",
             href: "#"
         },
     ]

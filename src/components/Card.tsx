@@ -12,6 +12,7 @@ interface Product {
     description: string;
     photo: string;
 }
+
 const CardComponent = ({id, name = "", price = 0, description = "", photo = "https://flowbite.com/docs/images/products/apple-watch.png", category = 0} : Product) => {
     return (
         <Card
@@ -32,6 +33,8 @@ const CardComponent = ({id, name = "", price = 0, description = "", photo = "htt
             <div className="flex items-center justify-between">
                 <span className="text-2xl font-bold text-primary dark:text-white">{price}</span>
                 <button
+                    type="button"
+                    onClick={() => {console.log(id)}}
                     className="rounded-lg hover:bg-tertiary px-5 py-2.5 text-center text-sm font-medium text-white bg-primary focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
                 >
                     Add to cart
