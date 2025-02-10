@@ -2,47 +2,65 @@
 "use client";
 
 import Link from "next/link";
-import { Navbar } from "flowbite-react";
+import { Button, Navbar } from "flowbite-react";
 import Image from "next/image";
+import { supabase } from "@/config/db";
+import { useEffect, useState } from "react";
+import { User } from "@supabase/supabase-js";
+import { navLink } from "@/constant/NavLink";
+import buttonTheme from "@/themes/button";
 
 export function NavbarComponent() {
-    const navLink = [
-        {
-            name: "Beranda",
-            href: "#"
-        },
-        {
-            name: "Menu",
-            href: "#"
-        },
-        {
-            name: "Keranjang",
-            href: "#"
-        },
-        {
-            name: "Masuk",
-            href: "#"
-        },
-    ]
+    const [user, setUser] = useState<User | null>(null);
+
+    const getUser = async () => {
+        const { data: { user } } = await supabase.auth.getUser();
+        setUser(user);
+    };
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
+        document.location.reload();
+    };
+
+    useEffect(() => {
+        getUser();
+    }, []);
 
     return (
         <div className="relative md:fixed w-full z-[999]">
 
-        <Navbar fluid className="lg:[&>*]:mx-20 py-5 dark:bg-gray-950">
-            <Navbar.Brand as={Link} href="https://flowbite-react.com" className="gap-2">
-                <Image src="/logo.png" width={100} height={100} className="object-cover w-10" alt="Flowbite React Logo" />
-                <span className="self-center whitespace-nowrap text-3xl font-semibold text-primary">Olvad</span>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-            <Navbar.Collapse className="[&>*]:text-white">
-                {
-                    navLink.map((item, index) => (
-                        <Navbar.Link key={index} as={Link} href={item.href} className="hover:!text-primary">{item.name}</Navbar.Link>
-                    ))
-                }
-            </Navbar.Collapse>
-        </Navbar>
-                </div>
+            <Navbar fluid className="lg:[&>*]:mx-20 py-5 dark:bg-gray-950">
+                <Navbar.Brand as={Link} href="https://flowbite-react.com" className="gap-2">
+                    <Image src="/logo.png" width={100} height={100} className="object-cover w-10" alt="Flowbite React Logo" />
+                    <span className="self-center whitespace-nowrap text-3xl font-semibold text-primary">Olvad</span>
+                </Navbar.Brand>
+                <Navbar.Toggle />
+                <Navbar.Collapse className="[&>*]:text-white">
+                    {
+                        navLink.map((item) => (
+                            <Navbar.Link key={item.name} as={Link} href={item.href} className="hover:!text-primary" onClick={item.name === "Logout" ? () => handleLogout() : undefined}>{item.name}</Navbar.Link>
+                        ))
+                    }
+                    {
+                        user && (
+                            <div className="flex gap-2">
+                                <Button theme={buttonTheme} color="primary" as={Link} href="/profile" className="hover:!text-primary w-full">Profile</Button>
+                                <Button theme={buttonTheme} color="failure" as="button" onClick={() => handleLogout()} className="hover:!text-primary w-full">Logout</Button>
+                            </div>
+                        )
+                    }
+                    {
+                        !user && (
+                            <div className="flex gap-2">
+                                <Button theme={buttonTheme} color="primary" as={Link} href="/login" className="hover:!text-primary w-full">Login</Button>
+                                <Button theme={buttonTheme} color="primary" as={Link} href="/register" className="hover:!text-primary w-full">Register</Button>
+                            </div>
+                        )
+                    }
+                </Navbar.Collapse>
+            </Navbar>
+        </div>
     );
 }
 

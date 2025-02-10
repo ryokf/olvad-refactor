@@ -28,8 +28,6 @@ const Order = () => {
         const { data } = await supabase.from("products").select();
         setProducts(data);
     };
-
-    console.log(products)
     
     return (
         <div className="min-h-screen">

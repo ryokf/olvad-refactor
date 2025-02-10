@@ -22,8 +22,6 @@ export default function RootLayout({
 
   const pathname = usePathname();
 
-  console.log(pathname)
-
   return (
     <html lang="en">
       <body
