@@ -3,12 +3,12 @@ import React from 'react'
 
 const Reviews = () => {
     return (
-        <div className="w-11/12 mx-auto min-h-screen my-8 relative">
+        <div className="w-11/12 mx-auto min-h-screen lg:min-h-fit my-8 lg:mb-32 relative">
             <div className="flex justify-center">
                 <h1 className="text-6xl font-semibold text-center text-outline absolute uppercase">Testimoni</h1>
             </div>
             <h1 className='text-3xl mt-5 font-bold text-center text-primary'>Pengalaman Pelanggan Kami</h1>
-            <div className="my-8 h-full">
+            <div className="my-8 h-full sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {/* <Carousel> */}
                 <div className="border-2 bg-white border-dashed border-primary rounded-xl p-6 my-4 text-center max-w-sm mx-auto">
                     <div className="relative w-16 h-16 mx-auto mb-4">
