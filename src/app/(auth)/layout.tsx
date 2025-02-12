@@ -9,12 +9,12 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname();
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
-            <div className="">
+        <div className="min-h-screen flex items-center justify-center mx-auto">
+            <div className="w-full mx-auto">
                 <Image src="/logo.png" width={100} height={100} className="object-cover w-16 mx-auto my-4" alt="Flowbite React Logo"></Image>
                 <h1 className="text-4xl mb-2 font-bold text-center text-primary">{pathname === "/login" ? "Login" : "Register"}</h1>
                 <p className="text-center font-semibold text-secondary mb-6">{pathname === "/login" ? "Login to your account" : "Create an account"}</p>
-                <form className="flex max-w-xl flex-col gap-4">
+                <form className="flex w-11/12 lg:w-1/2 mx-auto flex-col gap-4">
                     {children}
                     <p className="text-center text-sm font-semibold text-secondary">or {pathname === "/login" ? "sign in" : "sign up"} with</p>
                     <div className="flex items-center justify-between gap-x-4">

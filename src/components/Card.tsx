@@ -23,12 +23,12 @@ const CardComponent = ({id, name = "", price = 0, description = "", photo = "htt
         >
             <Badge className="w-fit bg-tertiary text-white" color="success">{category}</Badge>
 
-            <h5 className="font-semibold tracking-tight text-primary dark:text-white">
+            <h5 className="font-semibold text-primary dark:text-white lg:mt-2">
                 {name}
             </h5>
 
-            <div className="mb-2 flex items-center">
-                <p className="text-sm font-light text-secondary">{description}</p>
+            <div className="mb-2 flex items-center lg:mb-5">
+                <p className="text-sm font-light text-secondary tracking-tight">{description}</p>
             </div>
             <div className="flex items-center justify-between">
                 <span className="text-2xl lg:text-xl font-bold text-tertiary dark:text-white">Rp{Intl.NumberFormat('id-ID').format(price)}</span>
