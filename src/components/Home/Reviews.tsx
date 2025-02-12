@@ -7,7 +7,7 @@ const Reviews = () => {
             <div className="flex justify-center">
                 <h1 className="text-6xl font-semibold text-center text-outline absolute uppercase">Testimoni</h1>
             </div>
-            <h1 className='text-3xl mt-5 font-bold text-center text-primary'>Pengalaman Pelanggan Kami</h1>
+            <h1 className='text-3xl mt-5 lg:mt-7 font-bold text-center text-primary'>Pengalaman Pelanggan Kami</h1>
             <div className="my-8 h-full sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {/* <Carousel> */}
                 <div className="border-2 bg-white border-dashed border-primary rounded-xl p-6 my-4 text-center max-w-sm mx-auto">
