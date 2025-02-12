@@ -1,8 +1,6 @@
 "use client";
 
 import { signInWithGoogle } from '@/services/auth'
-import buttonTheme from '@/themes/button'
-import { Button } from 'flowbite-react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation';
 import React from 'react'
@@ -18,7 +16,6 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                 <p className="text-center font-semibold text-secondary mb-6">{pathname === "/login" ? "Login to your account" : "Create an account"}</p>
                 <form className="flex max-w-xl flex-col gap-4">
                     {children}
-                    <Button theme={buttonTheme} color="primary" className="bg-tertiary border-none">Submit</Button>
                     <p className="text-center text-sm font-semibold text-secondary">or {pathname === "/login" ? "sign in" : "sign up"} with</p>
                     <div className="flex items-center justify-between gap-x-4">
                         <hr className="border border-primary border-dashed w-full" />

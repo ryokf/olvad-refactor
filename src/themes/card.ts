@@ -13,7 +13,7 @@ const cardTheme: CustomFlowbiteTheme["card"] = {
     "img": {
         "base": "",
         "horizontal": {
-            "off": "rounded-t-lg aspect-video object-cover",
+            "off": "rounded-t-lg aspect-video w-96 object-cover",
             "on": "h-96 w-full rounded-t-lg object-cover md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
         }
     }

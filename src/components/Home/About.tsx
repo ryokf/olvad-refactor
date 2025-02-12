@@ -45,7 +45,7 @@ const About = () => {
     });
 
     return (
-        <div className="h-screen w-10/12 mx-auto relative flex justify-center items-center my-10">
+        <div className="h-screen w-10/12 mx-auto relative flex justify-center items-center my-20">
             <h1 ref={outlineTextRef} className="text-6xl top-6 text-outline absolute">OurStory</h1>
             <div ref={contentRef}>
                 <h1 className='text-3xl lg:text-8xl mx-20 mb-4 my-8 font-bold text-primary'>About Us</h1>
