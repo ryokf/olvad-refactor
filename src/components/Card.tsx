@@ -17,8 +17,8 @@ const CardComponent = ({id, name = "", price = 0, description = "", photo = "htt
     return (
         <Card
             theme={cardTheme}
-            className="max-w-80 mx-auto"
-            imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
+            className="max-w-80 lg:w-full mx-auto"
+            imgAlt={name}
             imgSrc={photo}
         >
             <Badge className="w-fit bg-tertiary text-white" color="success">{category}</Badge>

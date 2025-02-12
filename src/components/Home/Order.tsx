@@ -51,7 +51,7 @@ const Order = () => {
                     })
                 }
             </Carousel>
-            <div className="hidden lg:flex col-span-2 grid-cols-4 gap-4 h-fit lg:w-full">
+            <div className="hidden lg:flex col-span-2 gap-4 h-fit">
                     {
                         products?.map((product) => {
                             return (

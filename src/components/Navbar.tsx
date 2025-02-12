@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 import { navLink } from "@/constant/NavLink";
 import buttonTheme from "@/themes/button";
+import { navbarTheme } from "@/themes/navbar";
 
 export function NavbarComponent() {
     const [user, setUser] = useState<User | null>(null);
@@ -30,16 +31,16 @@ export function NavbarComponent() {
     return (
         <div className="relative md:fixed w-full z-[999]">
 
-            <Navbar fluid className="lg:[&>*]:mx-20 py-5 dark:bg-gray-950">
+            <Navbar theme={navbarTheme} fluid className="lg:[&>*]:mx-20 py-5 dark:bg-gray-950">
                 <Navbar.Brand as={Link} href="https://flowbite-react.com" className="gap-2">
                     <Image src="/logo.png" width={100} height={100} className="object-cover w-10" alt="Flowbite React Logo" />
                     <span className="self-center whitespace-nowrap text-3xl font-semibold text-primary">Olvad</span>
                 </Navbar.Brand>
                 <Navbar.Toggle />
-                <Navbar.Collapse className="[&>*]:text-white">
+                <Navbar.Collapse className="[&>*]:text-white lg:flex lg:items-center">
                     {
                         navLink.map((item) => (
-                            <Navbar.Link key={item.name} as={Link} href={item.href} className="hover:!text-primary" onClick={item.name === "Logout" ? () => handleLogout() : undefined}>{item.name}</Navbar.Link>
+                            <Navbar.Link key={item.name} as={Link} href={item.href} className="hover:!text-primary">{item.name}</Navbar.Link>
                         ))
                     }
                     {
