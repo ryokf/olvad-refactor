@@ -7,7 +7,7 @@ import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-
 
 const FooterComponent = () => {
     return (
-        <Footer theme={footerTheme} container className="">
+        <Footer theme={footerTheme} container className="bg-tertiary">
             <div className="w-full">
                 <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
                     <div >

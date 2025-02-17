@@ -5,7 +5,7 @@ import { MdEmail } from 'react-icons/md'
 
 const Contact = () => {
     return (
-        <div className="w-11/12 mx-auto my-20 relative">
+        <div className="w-11/12 mx-auto my-20 relative lg:max-w-7xl">
             <div className='grid grid-cols-1'>
                 <div className="max-h-full lg:grid lg:grid-cols-2">
                     <h1 className="text-6xl font-semibold text-outline lg:hidden absolute uppercase">Contact</h1>

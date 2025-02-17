@@ -45,10 +45,10 @@ const About = () => {
     });
 
     return (
-        <div className="h-screen w-10/12 mx-auto relative flex justify-center items-center my-20">
-            <h1 ref={outlineTextRef} className="text-6xl lg:text-8xl top-6 text-outline lg:left-20 lg:top-28 absolute">OurStory</h1>
+        <div className="h-screen w-10/12 mx-auto relative flex justify-center items-center mt-20 lg:max-w-7xl">
+            <h1 ref={outlineTextRef} className="text-6xl lg:text-8xl top-0 text-outline lg:left-20 lg:top-28 2xl:top-48 absolute">OurStory</h1>
             <div ref={contentRef}>
-                <h1 className='text-3xl lg:text-6xl mx-20 mb-4 my-8 font-bold text-primary'>About Us</h1>
+                <h1 className='text-3xl lg:text-6xl mx-20 mt-8 font-bold text-primary'>About Us</h1>
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                     <div className="flex justify-center my-4">
                         <Image src="/about.png" width={1000} height={1000} className="object-cover w-80 lg:w-96 lg:h-96 aspect-square rounded-xl" alt="Flowbite React Logo"></Image>

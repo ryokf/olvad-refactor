@@ -3,7 +3,7 @@ import React from 'react'
 
 const Reviews = () => {
     return (
-        <div className="w-11/12 mx-auto min-h-screen lg:min-h-fit my-8 lg:mb-32 relative">
+        <div className="w-11/12 mx-auto min-h-screen lg:min-h-fit lg:max-w-7xl my-8 lg:mb-32 relative">
             <div className="flex justify-center">
                 <h1 className="text-6xl font-semibold text-center text-outline absolute uppercase">Testimoni</h1>
             </div>
