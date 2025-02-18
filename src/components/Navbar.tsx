@@ -32,7 +32,7 @@ export function NavbarComponent() {
         <div className="relative md:fixed w-full z-[999]">
 
             <Navbar theme={navbarTheme} fluid className="lg:[&>*]:mx-20 py-5 dark:bg-gray-950">
-                <Navbar.Brand as={Link} href="https://flowbite-react.com" className="gap-2">
+                <Navbar.Brand as={Link} href="/" className="gap-2">
                     <Image src="/logo.png" width={100} height={100} className="object-cover w-10" alt="Flowbite React Logo" />
                     <span className="self-center whitespace-nowrap text-3xl font-semibold text-primary">Olvad</span>
                 </Navbar.Brand>

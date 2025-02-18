@@ -1,15 +1,15 @@
 const navLink = [
     {
         name: "Beranda",
-        href: "#"
+        href: "/"
     },
     {
         name: "Menu",
-        href: "#"
+        href: "/menu"
     },
     {
         name: "Keranjang",
-        href: "#"
+        href: "/cart"
     },
 ]
 
