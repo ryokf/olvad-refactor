@@ -30,6 +30,7 @@ const MenuPage = () => {
 
     useEffect(() => {
         fetchCategories();
+        fetchProducts(null);
     }, []);
 
     const fetchProducts = async (id: number|null) => {
