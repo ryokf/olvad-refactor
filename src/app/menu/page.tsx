@@ -49,8 +49,6 @@ const MenuPage = () => {
         }
     };
 
-    console.log(products);
-
     return (
         <div className='min-h-screen'>
             <div className="h-96">
