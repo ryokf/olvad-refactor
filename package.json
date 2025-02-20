@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@react-three/drei": "^10.0.0",
+    "@react-three/fiber": "^9.0.4",
     "@supabase/supabase-js": "^2.48.1",
     "@types/google-one-tap": "^1.2.6",
     "flowbite-react": "^0.10.2",
@@ -24,6 +26,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.173.0",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "postcss": "^8",

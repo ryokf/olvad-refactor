@@ -3,6 +3,8 @@
 import { poppins, sourGummy } from '@/themes/fonts';
 import textInputTheme from '@/themes/text_input';
 import { useGSAP } from '@gsap/react'
+import { OrbitControls } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
 import { TextInput } from 'flowbite-react';
 import gsap from 'gsap';
 import React, { useRef } from 'react'
@@ -45,8 +47,15 @@ const Hero = () => {
                     {/* <button className='bg-secondary text-white py-2 px-4 rounded-xl text-xl'>Lihat Menu</button> */}
                     <TextInput sizing={"lg"} theme={textInputTheme} color='primary' id="email4" type="email" icon={IoSearch} placeholder="Cari menu favoritmu" required className='w-full focus:!outline-primary mx-auto hidden lg:block' />
                 </div>
-                <div className="flex items-end justify-end">
-                    {/* <Image ref={imageRef} src="/hero 1.png" width={800} height={800} alt="hero" className='object-cover'></Image> */}
+                <div className="flex justify-center">
+                    <Canvas>
+                        <OrbitControls></OrbitControls>
+                        <ambientLight color={0x404040} intensity={0.5} />
+                        <mesh position={[0, 0, 0]} rotation={[0, 0, 0]}>
+                            <boxGeometry args={[1, 1, 1]} />
+                            <meshStandardMaterial />
+                        </mesh>
+                    </Canvas>
                 </div>
             </div>
         </div>
