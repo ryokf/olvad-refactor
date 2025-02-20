@@ -24,18 +24,21 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+
       <body
         className={`${poppins.className} antialiased overflow-x-hidden`}
       >
-        {
-          !noNavbar.includes(pathname) &&
-          <NavbarComponent></NavbarComponent>
-        }
-        {children}
-        {
-          !noFooter.includes(pathname) &&
-          <FooterComponent></FooterComponent>
-        }
+
+          {
+            !noNavbar.includes(pathname) &&
+            <NavbarComponent></NavbarComponent>
+          }
+          {children}
+          {
+            !noFooter.includes(pathname) &&
+            <FooterComponent></FooterComponent>
+          }
+
       </body>
     </html>
   );
