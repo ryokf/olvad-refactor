@@ -8,8 +8,28 @@ Title: bakery
 
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
+import * as THREE from 'three'
 
-function BakeryShop(props) {
+interface BakeryShopProps {
+  position?: [number, number, number];
+  rotation?: [number, number, number];
+  scale?: [number, number, number];
+  castShadow?: boolean;
+  receiveShadow?: boolean;
+  geometry?: THREE.BufferGeometry;
+  material?: THREE.Material | THREE.Material[];
+}
+
+// interface GLTFResult {
+//   nodes: {
+//     [key: string]: THREE.Mesh;
+//   };
+//   materials: {
+//     [key: string]: THREE.Material;
+//   };
+// }
+
+function BakeryShop(props: BakeryShopProps) {
   const { nodes, materials } = useGLTF('/models/bakery_shop.glb')
   return (
     <group {...props} dispose={null}>
