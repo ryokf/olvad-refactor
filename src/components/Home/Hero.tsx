@@ -47,12 +47,12 @@ const Hero = () => {
                     <TextInput sizing={"lg"} theme={textInputTheme} color='primary' id="email4" type="email" icon={IoSearch} placeholder="Cari menu favoritmu" required className='w-full focus:!outline-primary mx-auto hidden lg:block' />
                 </div>
                 <div className="flex justify-center">
-                    <Canvas camera={{fov: 35, position: [0, 5, 40]} }>
+                    {/* <Canvas camera={{fov: 35, position: [0, 5, 40]} }>
                         <directionalLight intensity={3} position={[-5, 5,5]}></directionalLight>
                         <ambientLight intensity={3} />
-                        {/* <Donut></Donut> */}
-                        {/* <BakeryShop position={[0, -4, 2]} scale={[1,1.8,1]} rotation={[0, -45, 0]}></BakeryShop> */}
-                    </Canvas>
+                        <Donut></Donut>
+                        <BakeryShop position={[0, -4, 2]} scale={[1,1.8,1]} rotation={[0, -45, 0]}></BakeryShop>
+                    </Canvas> */}
                 </div>
             </div>
         </div>
