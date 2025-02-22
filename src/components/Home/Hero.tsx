@@ -3,7 +3,6 @@
 import { poppins, sourGummy } from '@/themes/fonts';
 import textInputTheme from '@/themes/text_input';
 import { useGSAP } from '@gsap/react'
-import { Canvas } from '@react-three/fiber';
 import { TextInput } from 'flowbite-react';
 import gsap from 'gsap';
 import React, { useRef } from 'react'
