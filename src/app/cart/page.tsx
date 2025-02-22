@@ -15,8 +15,14 @@ const CartPage = () => {
         quantity: number;
     }
 
-    const cart: CartItem[] = JSON.parse(localStorage.getItem('cart') ?? '[]');
-    const totalPrice: number = cart.reduce((total: number, item: CartItem) => total + item.price * item.quantity, 0);
+    const [cart, setCart] = React.useState<CartItem[]>([]);
+    const [totalPrice, setTotalPrice] = React.useState<number>(0);
+
+    React.useEffect(() => {
+        const storedCart = JSON.parse(localStorage.getItem('cart') ?? '[]');
+        setCart(storedCart);
+        setTotalPrice(storedCart.reduce((total: number, item: CartItem) => total + item.price * item.quantity, 0));
+    }, []);
 
     console.log(cart);
 
