@@ -8,7 +8,6 @@ import { TextInput } from 'flowbite-react';
 import gsap from 'gsap';
 import React, { useRef } from 'react'
 import { IoSearch } from "react-icons/io5";
-import BakeryShop from '../3D_models/BakeryShop';
 
 const Hero = () => {
     const headTextRef = useRef(null);
@@ -52,7 +51,7 @@ const Hero = () => {
                         <directionalLight intensity={3} position={[-5, 5,5]}></directionalLight>
                         <ambientLight intensity={3} />
                         {/* <Donut></Donut> */}
-                        <BakeryShop position={[0, -4, 2]} scale={[1,1.8,1]} rotation={[0, -45, 0]}></BakeryShop>
+                        {/* <BakeryShop position={[0, -4, 2]} scale={[1,1.8,1]} rotation={[0, -45, 0]}></BakeryShop> */}
                     </Canvas>
                 </div>
             </div>
