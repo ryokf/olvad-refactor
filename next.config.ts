@@ -6,7 +6,6 @@ const nextConfig: NextConfig = {
     domains: ["flowbite.com", "lh3.googleusercontent.com", "fkrfxnwlarpexykfgjte.supabase.co"],
   },
   transpilePackages: ['three'],
-
 };
 
 export default nextConfig;

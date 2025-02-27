@@ -3,7 +3,15 @@
 import buttonTheme from '@/themes/button';
 import { Button, Label, Textarea, TextInput } from 'flowbite-react';
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect } from 'react'
+
+declare global {
+    interface Window {
+        snap: {
+            pay: (token: string) => void;
+        };
+    }
+}
 
 const CartPage = () => {
     interface CartItem {
@@ -18,13 +26,45 @@ const CartPage = () => {
     const [cart, setCart] = React.useState<CartItem[]>([]);
     const [totalPrice, setTotalPrice] = React.useState<number>(0);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const storedCart = JSON.parse(localStorage.getItem('cart') ?? '[]');
         setCart(storedCart);
         setTotalPrice(storedCart.reduce((total: number, item: CartItem) => total + item.price * item.quantity, 0));
     }, []);
 
     console.log(cart);
+
+    const checkout = async () => {
+        const data = {
+            price: totalPrice,
+        };
+
+        const response = await fetch("/api/tokenizer", {
+            method: "POST",
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        window.snap.pay(result.token);
+
+        localStorage.removeItem('cart');
+        setCart([]);
+        setTotalPrice(0);
+    }
+
+    useEffect(() => {
+        // render midtrans snap token
+        const snapScript = "https://app.sandbox.midtrans.com/snap/snap.js";
+        const clientKey = process.env.NEXT_PUBLIC_CLIENT ?? '';
+        const script = document.createElement("script");
+        script.src = snapScript;
+        script.setAttribute("data-client-key", clientKey);
+        script.async = true;
+        document.body.appendChild(script);
+        return () => {
+            document.body.removeChild(script);
+        }
+    }, []);
 
     return (
         <div className="min-h-screen">
@@ -118,7 +158,7 @@ const CartPage = () => {
                                 <Button
                                     theme={buttonTheme}
                                     color='primary'
-                                    type="submit"
+                                    onClick={checkout}
                                 >
                                     Checkout
                                 </Button>

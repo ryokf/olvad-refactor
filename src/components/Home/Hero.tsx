@@ -5,13 +5,17 @@ import textInputTheme from '@/themes/text_input';
 import { useGSAP } from '@gsap/react'
 import { TextInput } from 'flowbite-react';
 import gsap from 'gsap';
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { IoSearch } from "react-icons/io5";
+import BakeryShop from '../3D_model/BakeryShop';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
 
 const Hero = () => {
     const headTextRef = useRef(null);
     const outlineTextRef = useRef(null);
     const imageRef = useRef(null);
+
 
     useGSAP(() => {
         gsap.from(headTextRef.current, {
@@ -33,7 +37,12 @@ const Hero = () => {
             duration: 1.5,
             ease: "power4.out"
         })
+
+        
     });
+
+
+
 
     return (
         <div className="lg:max-w-8xl w-11/12 mx-auto min-h-screen">
@@ -46,12 +55,17 @@ const Hero = () => {
                     <TextInput sizing={"lg"} theme={textInputTheme} color='primary' id="email4" type="email" icon={IoSearch} placeholder="Cari menu favoritmu" required className='w-full focus:!outline-primary mx-auto hidden lg:block' />
                 </div>
                 <div className="flex justify-center">
-                    {/* <Canvas camera={{fov: 35, position: [0, 5, 40]} }>
+                    <Canvas orthographic camera={{zoom: 55, position: [0, 5, 5]} }>
                         <directionalLight intensity={3} position={[-5, 5,5]}></directionalLight>
                         <ambientLight intensity={3} />
-                        <Donut></Donut>
-                        <BakeryShop position={[0, -4, 2]} scale={[1,1.8,1]} rotation={[0, -45, 0]}></BakeryShop>
-                    </Canvas> */}
+                        <BakeryShop position={[0, -1.5, 2]} scale={[0.75, 0.95, 0.75]}></BakeryShop>
+                        <OrbitControls 
+                            enableZoom={false}
+                            enablePan={false}
+                            minPolarAngle={Math.PI / 3}
+                            minAzimuthAngle={-Math.PI / 4}
+                        ></OrbitControls>
+                    </Canvas>
                 </div>
             </div>
         </div>

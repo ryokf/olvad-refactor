@@ -15,6 +15,7 @@
     "@supabase/supabase-js": "^2.48.1",
     "@types/google-one-tap": "^1.2.6",
     "flowbite-react": "^0.10.2",
+    "midtrans-client": "^1.4.2",
     "next": "15.1.6",
     "react": "^19.0.0",
     "react-countup": "^6.5.3",
@@ -23,7 +24,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@types/node": "^20",
+    "@types/node": "^20.17.19",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.173.0",
