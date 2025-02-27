@@ -5,7 +5,6 @@ import Contact from "@/components/Home/Contact";
 import Hero from "@/components/Home/Hero";
 import Order from "@/components/Home/Order";
 import Reviews from "@/components/Home/Reviews";
-import { Suspense } from 'react';
 
 
 export default function Home() {
