@@ -1,5 +1,8 @@
 "use client"
 
+import { supabase } from '@/config/db';
+import Cart from '@/models/Cart';
+import { getCartByCustomerId, updateCart } from '@/services/cartService';
 import buttonTheme from '@/themes/button';
 import { Button, Label, Textarea, TextInput } from 'flowbite-react';
 import Image from 'next/image'
@@ -14,25 +17,39 @@ declare global {
 }
 
 const CartPage = () => {
-    interface CartItem {
-        id: number;
-        photo: string;
-        name: string;
-        category: string;
-        price: number;
-        quantity: number;
-    }
-
-    const [cart, setCart] = React.useState<CartItem[]>([]);
+    const [cart, setCart] = React.useState<Cart[]>([]);
     const [totalPrice, setTotalPrice] = React.useState<number>(0);
 
     useEffect(() => {
-        const storedCart = JSON.parse(localStorage.getItem('cart') ?? '[]');
-        setCart(storedCart);
-        setTotalPrice(storedCart.reduce((total: number, item: CartItem) => total + item.price * item.quantity, 0));
+        const checkLogin = async () => {
+            const { data: { user } } = await supabase.auth.getUser()
+            if (user) {
+                const fetchCart = async () => {
+                    const data = await getCartByCustomerId(user.id);
+                    const total = data.reduce((acc, item) => acc + (item.products.price * item.qty), 0);
+                    setTotalPrice(total);
+                    setCart(data);
+                }
+                fetchCart();
+            }
+        }
+        checkLogin();
+
     }, []);
 
-    console.log(cart);
+    const handleQtyChange = async (id: number, qty: number) => {
+        const updatedCartList = cart.map(item => {
+            if (item.id === id) {
+                return { ...item, qty: qty } as Cart;
+            }
+            return item;
+        });
+        setCart(updatedCartList);
+        const total = updatedCartList.reduce((acc, item) => acc + (item.products.price * item.qty), 0);
+        setTotalPrice(total);
+        const updatedCart = await updateCart(id, qty);
+        if (!updatedCart) return;
+    }
 
     const checkout = async () => {
         const data = {
@@ -44,6 +61,8 @@ const CartPage = () => {
             body: JSON.stringify(data),
         });
 
+        console.log("response", response);
+
         const result = await response.json();
         window.snap.pay(result.token);
 
@@ -54,7 +73,7 @@ const CartPage = () => {
 
     useEffect(() => {
         // render midtrans snap token
-        const snapScript = "https://app.sandbox.midtrans.com/snap/snap.js";
+        const snapScript = "https://app.midtrans.com/snap/snap.js";
         const clientKey = process.env.NEXT_PUBLIC_CLIENT ?? '';
         const script = document.createElement("script");
         script.src = snapScript;
@@ -75,16 +94,22 @@ const CartPage = () => {
                         <h2 className="text-xl font-semibold mb-4 text-secondary">Order Summary</h2>
                         <ul className="w-10/12">
                             {
-                                cart.map((item: { id: number; photo: string; name: string; category: string; price: number; quantity: number; }) => (
+                                cart.map((item: Cart) => (
                                     <li key={item.id} className="flex justify-between items-center mb-4">
                                         <div className="flex items-center">
-                                            <Image src={item.photo} alt={item.name} width={100} height={100} className="w-16 h-16 object-cover mr-4 rounded-full" />
+                                            <Image src={item.products.photo} alt={item.products.name} width={100} height={100} className="w-16 h-16 object-cover mr-4 rounded-full" />
                                             <div>
-                                                <p className="font-semibold">{item.name}</p>
-                                                <p className="text-sm text-gray-600">Qty : {item.quantity}</p>
+                                                <p className="font-semibold">{item.products.name}</p>
+                                                <p className="text-gray-600">{item.products.price}</p>
                                             </div>
                                         </div>
-                                        <p className="font-semibold">Rp{item.price * item.quantity}</p>
+                                        <div className="flex flex-col items-end">
+                                            <p className="font-semibold text-left">Rp{item.products.price * item.qty}</p>
+                                            <div className="flex items-center mt-2">
+                                                <p className="text-gray-600 mr-2">Qty:</p>
+                                                <input type="number" className='w-16 h-6 rounded border border-gray-300 text-center text-sm' value={item.qty} onChange={(e) => handleQtyChange(item.id, parseInt(e.target.value))}/>
+                                            </div>
+                                        </div>
                                     </li>
                                 ))
                             }

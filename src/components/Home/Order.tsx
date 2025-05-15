@@ -6,7 +6,7 @@ import CardComponent from '../Card';
 import buttonTheme from '@/themes/button';
 import carouselTheme from '@/themes/caraousel';
 import Product from '@/models/Product';
-import { getProducts } from '@/services/productService';
+import { getProductLimit, getProducts } from '@/services/productService';
 
 const Order = () => {
 
@@ -14,7 +14,7 @@ const Order = () => {
 
     useEffect(() => {
         const getPromoData = async () => {
-            const data = await getProducts();
+            const data = await getProductLimit(4);
             setProducts(data);
         };
 

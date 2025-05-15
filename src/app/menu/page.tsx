@@ -37,8 +37,7 @@ const MenuPage = () => {
     };
 
     return (
-        <div className='min-h-screen'>
-            <div className="h-96">
+        <div className='min-h-screen mb-12'>
                 <h1 className='text-3xl lg:text-5xl font-bold text-center text-primary pt-10 lg:pt-32'>Daftar Menu</h1>
                 <div className="flex justify-start my-10 max-w-5xl w-11/12 mx-auto gap-4">
                     <Button theme={buttonTheme} color='primary' onClick={() => fetchProducts(null)}>All</Button>
@@ -62,7 +61,6 @@ const MenuPage = () => {
                             )
                         })
                     }
-                </div>
             </div>
         </div>
     )
