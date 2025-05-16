@@ -5,7 +5,6 @@ import { supabase } from "@/config/db";
 import { addToCart, getCartByCustomerId, updateCart } from "@/services/cartService";
 import cardTheme from "@/themes/card";
 import { Badge, Card } from "flowbite-react";
-import { useEffect } from "react";
 
 interface Product {
     id: number;
