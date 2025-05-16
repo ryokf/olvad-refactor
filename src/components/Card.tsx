@@ -1,6 +1,8 @@
 
 "use client";
 
+import { supabase } from "@/config/db";
+import { addToCart, getCartByCustomerId, updateCart } from "@/services/cartService";
 import cardTheme from "@/themes/card";
 import { Badge, Card } from "flowbite-react";
 import { useEffect } from "react";
@@ -16,28 +18,23 @@ interface Product {
 
 const CardComponent = ({ id, name = "", price = 0, description = "", photo = "https://flowbite.com/docs/images/products/apple-watch.png", category = "category" }: Product) => {
 
-    const addCart = () => {
-        const product = { id, name, category, price, description, photo, quantity: 1 };
-        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-        interface CartItem extends Product {
-            quantity: number;
+    const addCart = async () => {
+        const { data: { user } } = await supabase.auth.getUser()
+        const cart = await getCartByCustomerId(user?.id || "");
+        const existingItem = cart.find((item) => item.products.id === id);
+        if (existingItem) {
+            await updateCart(existingItem.id, existingItem.qty + 1);
+            return;
         }
 
-        const existingProductIndex = cart.findIndex((item: CartItem) => item.id === id);
-
-        if (existingProductIndex !== -1) {
-            cart[existingProductIndex].quantity += 1;
-        } else {
-            cart.push(product);
+        if (!user) {
+            alert("Please login first");
+            return;
         }
 
-        localStorage.setItem('cart', JSON.stringify(cart));
+        await addToCart(user.id, id, 1);
+        if (!cart) return;
     }
-
-    useEffect(() => {
-        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-        console.log(cart);
-    }, [])
 
     return (
         <Card

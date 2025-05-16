@@ -2,7 +2,7 @@
 
 import { supabase } from '@/config/db';
 import Cart from '@/models/Cart';
-import { getCartByCustomerId, updateCart } from '@/services/cartService';
+import { deleteCart, getCartByCustomerId, updateCart } from '@/services/cartService';
 import buttonTheme from '@/themes/button';
 import { Button, Label, Textarea, TextInput } from 'flowbite-react';
 import Image from 'next/image'
@@ -19,23 +19,30 @@ declare global {
 const CartPage = () => {
     const [cart, setCart] = React.useState<Cart[]>([]);
     const [totalPrice, setTotalPrice] = React.useState<number>(0);
-
+    
     useEffect(() => {
         const checkLogin = async () => {
             const { data: { user } } = await supabase.auth.getUser()
             if (user) {
-                const fetchCart = async () => {
-                    const data = await getCartByCustomerId(user.id);
-                    const total = data.reduce((acc, item) => acc + (item.products.price * item.qty), 0);
-                    setTotalPrice(total);
-                    setCart(data);
-                }
                 fetchCart();
             }
         }
         checkLogin();
 
     }, []);
+
+    const fetchCart = async () => {
+        const { data: { user } } = await supabase.auth.getUser()
+        const data = await getCartByCustomerId(user.id);
+        const total = data.reduce((acc, item) => acc + (item.products.price * item.qty), 0);
+        setTotalPrice(total);
+        setCart(data);
+    }
+
+    const handleDeleteCart = async (id: number) => {
+        await deleteCart(id);
+        await fetchCart();
+    }
 
     const handleQtyChange = async (id: number, qty: number) => {
         const updatedCartList = cart.map(item => {
@@ -107,9 +114,10 @@ const CartPage = () => {
                                             <p className="font-semibold text-left">Rp{item.products.price * item.qty}</p>
                                             <div className="flex items-center mt-2">
                                                 <p className="text-gray-600 mr-2">Qty:</p>
-                                                <input type="number" className='w-16 h-6 rounded border border-gray-300 text-center text-sm' value={item.qty} onChange={(e) => handleQtyChange(item.id, parseInt(e.target.value))}/>
+                                                <input type="number" className='w-16 h-6 rounded border border-gray-300 text-center text-sm' value={item.qty} onChange={(e) => handleQtyChange(item.id, parseInt(e.target.value))} />
                                             </div>
                                         </div>
+                                        <button onClick={async () => await handleDeleteCart(item.id)} className='text-red-500'>hapus</button>
                                     </li>
                                 ))
                             }
