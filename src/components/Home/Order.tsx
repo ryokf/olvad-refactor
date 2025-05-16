@@ -6,7 +6,7 @@ import CardComponent from '../Card';
 import buttonTheme from '@/themes/button';
 import carouselTheme from '@/themes/caraousel';
 import Product from '@/models/Product';
-import { getProductLimit, getProducts } from '@/services/productService';
+import { getProductLimit} from '@/services/productService';
 
 const Order = () => {
 
