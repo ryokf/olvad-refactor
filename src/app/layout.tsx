@@ -17,8 +17,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const noNavbar = ["/login", "/register"];
-  const noFooter = ["/login", "/register"];
+  const noNavbar = ["/login", "/register", "/admin"];
+  const noFooter = ["/login", "/register", "/admin"];
 
   const pathname = usePathname();
 
