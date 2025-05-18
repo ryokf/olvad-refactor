@@ -2,18 +2,10 @@
 "use client";
 
 import { supabase } from "@/config/db";
+import Product from "@/models/Product";
 import { addToCart, getCartByCustomerId, updateCart } from "@/services/cartService";
 import cardTheme from "@/themes/card";
 import { Badge, Card } from "flowbite-react";
-
-interface Product {
-    id: number;
-    name: string;
-    category: string;
-    price: number;
-    description: string;
-    photo: string;
-}
 
 const CardComponent = ({ id, name = "", price = 0, description = "", photo = "https://flowbite.com/docs/images/products/apple-watch.png", category = "category" }: Product) => {
 
