@@ -55,9 +55,7 @@ const MenuPage = () => {
                     {
                         products?.map((product) => {
                             return (
-                                <CardComponent
-                                    key={product.getId()} id={product.getId()} name={product.getName()} price={product.getPrice()} description={product.getDescription()} photo={product.getPhoto()} category={product.getCategory()}
-                                />
+                                <CardComponent key={product.getId()} product={product}/>
                             )
                         })
                     }

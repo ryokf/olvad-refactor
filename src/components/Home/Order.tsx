@@ -34,8 +34,9 @@ const Order = () => {
             <Carousel theme={carouselTheme} className="w-full my-10 lg:hidden" indicators={false} pauseOnHover>
                 {
                     products?.map((product) => {
+                        console.log(product);
                         return (
-                            <CardComponent key={product.getId()} id={product.getId()} name={product.getName()} price={product.getPrice()} description={product.getDescription()} photo={product.getPhoto()} category={product.getCategory()} />
+                            <CardComponent key={product.id} product={product} />
                         )
                     })
                 }
@@ -44,7 +45,7 @@ const Order = () => {
                 {
                     products?.map((product) => {
                         return (
-                            <CardComponent key={product.getId()} id={product.getId()} name={product.getName()} price={product.getPrice()} description={product.getDescription()} photo={product.getPhoto()} category={product.getCategory()} />
+                            <CardComponent key={product.id} product={product} />
                         )
                     })
                 }

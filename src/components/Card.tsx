@@ -7,12 +7,13 @@ import { addToCart, getCartByCustomerId, updateCart } from "@/services/cartServi
 import cardTheme from "@/themes/card";
 import { Badge, Card } from "flowbite-react";
 
-const CardComponent = ({ id, name = "", price = 0, description = "", photo = "https://flowbite.com/docs/images/products/apple-watch.png", category = "category" }: Product) => {
+const CardComponent = ({ product }: { product: Product }) => {
+    console.log(product.getName());   
 
     const addCart = async () => {
         const { data: { user } } = await supabase.auth.getUser()
         const cart = await getCartByCustomerId(user?.id || "");
-        const existingItem = cart.find((item) => item.products.id === id);
+        const existingItem = cart.find((item) => item.products.id === product.id);
         if (existingItem) {
             await updateCart(existingItem.id, existingItem.qty + 1);
             return;
@@ -23,7 +24,7 @@ const CardComponent = ({ id, name = "", price = 0, description = "", photo = "ht
             return;
         }
 
-        await addToCart(user.id, id, 1);
+        await addToCart(user.id, product.id, 1);
         if (!cart) return;
     }
 
@@ -31,20 +32,20 @@ const CardComponent = ({ id, name = "", price = 0, description = "", photo = "ht
         <Card
             theme={cardTheme}
             className="max-w-80 lg:w-full mx-auto"
-            imgAlt={name}
-            imgSrc={photo}
+            imgAlt={product.name}
+            imgSrc={product.photo}
         >
-            <Badge className="w-fit bg-tertiary text-white" color="success">{category}</Badge>
+            <Badge className="w-fit bg-tertiary text-white" color="success">{product.category}</Badge>
 
             <h5 className="font-semibold text-primary dark:text-white lg:mt-2">
-                {name}
+                {product.getName()}
             </h5>
 
             <div className="mb-2 flex items-center lg:mb-5">
-                <p className="text-sm font-light text-secondary tracking-tight">{description}</p>
+                <p className="text-sm font-light text-secondary tracking-tight">{product.description}</p>
             </div>
             <div className="flex items-center justify-between">
-                <span className="text-2xl lg:text-xl font-bold text-tertiary dark:text-white">Rp{Intl.NumberFormat('id-ID').format(price)}</span>
+                <span className="text-2xl lg:text-xl font-bold text-tertiary dark:text-white">Rp{Intl.NumberFormat('id-ID').format(product.price)}</span>
                 <button
                     type="button"
                     onClick={() => { addCart() }}
