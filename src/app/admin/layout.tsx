@@ -5,7 +5,10 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className="min-h-screen w-full">
             <SidebarComponent></SidebarComponent>
-            {children}
+            <div className="ml-80 w-full">
+                <h1 className='text-3xl font-medium text-black my-8 mx-10'>Dashboard Admin</h1>
+                {children}
+            </div>
         </div>
     )
 }
