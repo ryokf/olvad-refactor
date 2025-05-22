@@ -2,10 +2,12 @@
 
 import { supabase } from '@/config/db';
 import Cart from '@/models/Cart';
-import { deleteCart, getCartByCustomerId, updateCart } from '@/services/cartService';
+import { clearCart, deleteCart, getCartByCustomerId, updateCart } from '@/services/cartService';
+import { addTransaction } from '@/services/transactionService';
 import buttonTheme from '@/themes/button';
 import { Button, Label, Textarea, TextInput } from 'flowbite-react';
 import Image from 'next/image'
+import { redirect } from 'next/navigation';
 import React, { useEffect } from 'react'
 
 declare global {
@@ -70,12 +72,20 @@ const CartPage = () => {
 
         console.log("response", response);
 
-        const result = await response.json();
-        window.snap.pay(result.token);
+        const { data: { user } } = await supabase.auth.getUser()
+        
+                // const result = await response.json();
+                // window.snap.pay(result.token);
 
-        localStorage.removeItem('cart');
-        setCart([]);
-        setTotalPrice(0);
+        await addTransaction({
+            customer_id: user.id,
+            detail_order: {items : cart.map(item => ({name: item.products.name, qty: item.qty, price: item.products.price, photo: item.products.photo, product_id: item.products.id }))},
+            status: "processed",
+            price: totalPrice
+        });
+
+        clearCart(user.id);
+        redirect("/order");
     }
 
     useEffect(() => {

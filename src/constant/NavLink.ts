@@ -11,6 +11,10 @@ const navLink = [
         name: "Keranjang",
         href: "/cart"
     },
+    {
+        name: "Pesanan",
+        href: "/order"
+    }
 ]
 
 export { navLink } 
