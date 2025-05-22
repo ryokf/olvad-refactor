@@ -4,6 +4,7 @@
 import { getCategories } from "@/services/categoryService";
 import { addProduct } from "@/services/productService";
 import { Button, FileInput, Label, Modal, ModalBody, ModalHeader, Select, TextInput } from "flowbite-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export function ModalAddProduct({ fetchProducts }: { fetchProducts: () => void}) {
@@ -133,7 +134,7 @@ export function ModalAddProduct({ fetchProducts }: { fetchProducts: () => void})
 
                         {photoUrl && (
                             <div className="mt-4">
-                                <img src={photoUrl} alt="Preview" className="w-full max-h-60 object-cover rounded-lg" />
+                                <Image width={100} height={100} src={photoUrl} alt="Preview" className="w-full max-h-60 object-cover rounded-lg" />
                             </div>
                         )}
 

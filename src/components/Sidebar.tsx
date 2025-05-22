@@ -23,13 +23,13 @@ export function SidebarComponent() {
                     <SidebarItem href="/admin" icon={HiChartPie} labelColor="dark" active={isActive("/admin")}>
                         Dashboard
                     </SidebarItem>
-                    <SidebarItem href="admin/products" icon={RiBreadLine} labelColor="dark" active={isActive("/admin/products")}>
+                    <SidebarItem href="/admin/products" icon={RiBreadLine} labelColor="dark" active={isActive("/admin/products")}>
                         Products
                     </SidebarItem>
-                    <SidebarItem href="#" icon={MdOutlineShoppingCart} labelColor="dark">
+                    <SidebarItem href="/admin/orders" icon={MdOutlineShoppingCart} labelColor="dark">
                         Order
                     </SidebarItem>
-                    <SidebarItem href="#" icon={GrHistory} labelColor="dark">
+                    <SidebarItem href="/admin/transactions" icon={GrHistory} labelColor="dark">
                         History
                     </SidebarItem>
                 </SidebarItemGroup>
