@@ -1,5 +1,5 @@
 import React from 'react'
-import { SidebarComponent } from '../../components/Sidebar';
+import { SidebarComponent } from '../../components/Admin/Sidebar';
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
     return (

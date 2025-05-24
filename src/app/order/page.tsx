@@ -5,13 +5,7 @@ import Image from "next/image";
 import { getTransactionByCustomerId } from "@/services/transactionService";
 import { supabase } from "@/config/db";
 import { useEffect, useState } from "react";
-
-const filters = [
-    { label: "Semua", key: "" },
-    { label: "Diproses", key: "processed" },
-    { label: "Dikirim", key: "shipped" },
-    { label: "Selesai", key: "done" },
-];
+import { filterTransaction } from "@/constant/FilterTransaction";
 
 export default function OrdersPage() {
     // Hitung total harga diskon
@@ -44,7 +38,7 @@ export default function OrdersPage() {
                 <h1 className="text-3xl font-semibold mb-4">Pesanan anda</h1>
                 {/* Status info */}
                 <nav className="flex justify-center w-fit border rounded-lg border-gray-300 font-semibold text-sm select-none">
-                    {filters.map(({ label, key }) => {
+                    {filterTransaction.map(({ label, key }) => {
                         const isActive = key === active;
                         return (
                             <button

@@ -1,4 +1,4 @@
-type OrderStatus = 'pending' | 'paid' | 'shipped' | 'done' | 'cancelled' | string;
+type OrderStatus = 'processed' | 'ready' | 'done' | string;
 
 interface Items {
     qty: number;
@@ -14,6 +14,12 @@ export class Transaction {
     id: number;
     createdAt: string ;
     customer_id: string; // UUID
+    customer: {
+        full_name: string;
+        email: string;
+        phone: string | null;
+        avatar_url: string | null;
+    }
     detail_order: DetailOrder;
     status: OrderStatus;
     price: number;
@@ -22,6 +28,12 @@ export class Transaction {
         id: number,
         createdAt: string,
         customer_id: string,
+        customer: {
+            full_name: string;
+            email: string;
+            phone: string | null;
+            avatar_url: string | null;
+        },
         detailOrderJson: string,
         status: OrderStatus,
         price: number
@@ -29,6 +41,7 @@ export class Transaction {
         this.id = id;
         this.createdAt = createdAt || new Date().toISOString();
         this.customer_id = customer_id;
+        this.customer = customer;
         this.detail_order = JSON.parse(detailOrderJson);
         this.status = status;
         this.price = price;
@@ -38,7 +51,7 @@ export class Transaction {
         return this.id;
     }
 
-    getCreatedAt(): Date {
+    getCreatedAt(): string {
         return this.createdAt;
     }
 
@@ -58,9 +71,18 @@ export class Transaction {
         return this.price;
     }
 
+    getCustomer(): {
+        full_name: string;
+        email: string;
+        phone: string | null;
+        avatar_url: string | null;
+    } {
+        return this.customer;
+    }
+
     static getAll(data: Transaction): Transaction {
         console.log("data", data);
-        return new Transaction(data.id, data.createdAt, data.customer_id, JSON.stringify(data.detail_order), data.status, data.price);
+        return new Transaction(data.id, data.createdAt, data.customer_id, data.customer, JSON.stringify(data.detail_order), data.status, data.price);
     }
 
     // Contoh method untuk mendapatkan total qty item
