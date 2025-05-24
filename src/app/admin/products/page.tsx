@@ -56,7 +56,7 @@ const AdminProductPage = () => {
                                 </TableCell>
                                 <TableCell>{Intl.NumberFormat('id-ID').format(product.price)}</TableCell>
                                 <TableCell>
-                                    <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                                    <a href="#" className="font-medium text-tertiary hover:underline dark:text-cyan-500">
                                         <ModalUpdateProduct fetchProducts={async () => await fetchProducts()} product={product}></ModalUpdateProduct>
                                     </a>
                                     <span className="mx-2">|</span>

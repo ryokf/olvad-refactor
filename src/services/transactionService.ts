@@ -12,22 +12,41 @@ export const getTransactionByCustomerId = async (id: string, status?: string) =>
 };
 
 export const getTransactionByStatus = async (status: string) => {
-    const { data } = await supabase.from("transactions").select("*").eq("status", status);
-    console.log(data.map(item => item.customer_id));
-    const user_id = data.map(item => item.customer_id);
-    await Promise.all(user_id.map(async (item) => {
-        const userData = await fetch('/api/admin/' + item);
-        const json = await userData.json();
-        console.log(json);
-        data.map(item => item.customer = {
-            full_name: json.user.user_metadata.full_name,
-            email: json.user.email,
-            phone: json.user.user_metadata.phone,
-            avatar_url: json.user.user_metadata.avatar_url
-        });
-        return json
-    }))
-    return data.map(item => Transaction.getAll(item));
+    if (status === "") {
+        const { data } = await supabase.from("transactions").select("*");
+
+        const user_id = data.map(item => item.customer_id);
+        await Promise.all(user_id.map(async (item) => {
+            const userData = await fetch('/api/admin/' + item);
+            const json = await userData.json();
+            console.log(json);
+            data.map(item => item.customer = {
+                full_name: json.user.user_metadata.full_name,
+                email: json.user.email,
+                phone: json.user.user_metadata.phone,
+                avatar_url: json.user.user_metadata.avatar_url
+            });
+            return json
+        }))
+        return data.map(item => Transaction.getAll(item));
+    } else {
+        const { data } = await supabase.from("transactions").select("*").eq("status", status);
+
+        const user_id = data.map(item => item.customer_id);
+        await Promise.all(user_id.map(async (item) => {
+            const userData = await fetch('/api/admin/' + item);
+            const json = await userData.json();
+            console.log(json);
+            data.map(item => item.customer = {
+                full_name: json.user.user_metadata.full_name,
+                email: json.user.email,
+                phone: json.user.user_metadata.phone,
+                avatar_url: json.user.user_metadata.avatar_url
+            });
+            return json
+        }))
+        return data.map(item => Transaction.getAll(item));
+    }
 }
 
 export const addTransaction = async (transaction) => {

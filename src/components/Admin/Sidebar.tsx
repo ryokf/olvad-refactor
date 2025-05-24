@@ -5,8 +5,7 @@ import { Sidebar, SidebarItem, SidebarItemGroup, SidebarItems, SidebarLogo } fro
 import {  HiChartPie,  } from "react-icons/hi";
 import { usePathname } from 'next/navigation';
 import { RiBreadLine } from "react-icons/ri";
-import { MdOutlineShoppingCart } from "react-icons/md";
-import { GrHistory } from "react-icons/gr";
+import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
 
 export function SidebarComponent() {
     const pathname = usePathname();
@@ -26,11 +25,11 @@ export function SidebarComponent() {
                     <SidebarItem href="/admin/products" icon={RiBreadLine} labelColor="dark" active={isActive("/admin/products")}>
                         Products
                     </SidebarItem>
-                    <SidebarItem href="/admin/orders" icon={MdOutlineShoppingCart} labelColor="dark">
-                        Order
+                    <SidebarItem href="/admin/category" icon={MdOutlineCategory} labelColor="dark" active={isActive("/admin")}>
+                        Category
                     </SidebarItem>
-                    <SidebarItem href="/admin/transactions" icon={GrHistory} labelColor="dark">
-                        History
+                    <SidebarItem href="/admin/orders" icon={MdOutlineShoppingCart} active={isActive("/admin/orders")} labelColor="dark">
+                        Order
                     </SidebarItem>
                 </SidebarItemGroup>
             </SidebarItems>

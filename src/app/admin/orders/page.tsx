@@ -96,7 +96,10 @@ export default function OrdersPage() {
                                 </div>
                                 <div className="mt-4 flex justify-between items-center space-x-2 border-t border-gray-300 pt-4">
                                     <span className="text-lg font-semibold">Total Pesanan: {product.price.toLocaleString("id-ID")}</span>
-                                    <button onClick={() => handleUpdate(product.id, "ready")} className="bg-tertiary px-4 font-bold text-white py-2 rounded hover:bg-tertiaty/90 transition">{`${product.status === "ready" ? "Sudah diambil" : "Pesanan siap"}`}</button>
+                                    {
+                                        product.status != "done" && 
+                                        <button onClick={() => product.status === "ready" ? handleUpdate(product.id, "done") : handleUpdate(product.id, "ready")} className="bg-tertiary px-4 font-bold text-white py-2 rounded hover:bg-tertiaty/90 transition">{`${product.status === "ready" ? "Sudah diambil" : "Pesanan siap"}`}</button>
+                                    }
                                 </div>
                             </div>
                         ))}

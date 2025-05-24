@@ -14,6 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import Product from "@/models/Product";
 import { getCategories } from "@/services/categoryService";
+import Image from "next/image";
 
 export function ModalUpdateProduct({
     fetchProducts,
@@ -77,9 +78,9 @@ export function ModalUpdateProduct({
         <>
             <button
                 onClick={() => setOpenModal(true)}
-                className="bg-tertiary mb-6"
+                className="mb-6"
             >
-                Edit Produk
+                Edit
             </button>
             <Modal show={openModal} size="md" onClose={onCloseModal} popup>
                 <ModalHeader />
@@ -157,7 +158,7 @@ export function ModalUpdateProduct({
 
                         <div>
                             <Label className="mb-2 block" htmlFor="file-upload">
-                                Upload foto baru (opsional)
+                                Upload foto baru
                             </Label>
                             <FileInput
                                 id="file-upload"
@@ -168,7 +169,9 @@ export function ModalUpdateProduct({
 
                         {photoUrl && (
                             <div className="mt-4">
-                                <img
+                                <Image
+                                    width={200}
+                                    height={200}
                                     src={photoUrl}
                                     alt="Preview"
                                     className="w-full max-h-60 object-cover rounded-lg"
