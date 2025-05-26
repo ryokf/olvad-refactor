@@ -14,6 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import Product from "@/models/Product";
 import { getCategories } from "@/services/categoryService";
+import Image from "next/image";
 
 export function ModalUpdateProduct({
     fetchProducts,
@@ -61,9 +62,6 @@ export function ModalUpdateProduct({
     };
 
     const handleSubmit = async () => {
-        data.category = categories.find(
-            (category) => category.name === data.category
-        )
         console.log(data.category);
         const result = await updateProduct(data as Product);
         if (result) {
@@ -85,8 +83,6 @@ export function ModalUpdateProduct({
     useEffect(() => {
         fetchCategories();
     }, []);
-
-    console.log(data);
 
     return (
         <>
@@ -183,7 +179,9 @@ export function ModalUpdateProduct({
 
                         {photoUrl && (
                             <div className="mt-4">
-                                <img
+                                <Image
+                                    width={200}
+                                    height={200}
                                     src={photoUrl}
                                     alt="Preview"
                                     className="w-full max-h-60 object-cover rounded-lg"

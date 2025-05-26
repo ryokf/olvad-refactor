@@ -80,7 +80,7 @@ export const addProduct = async (product) => {
     return productData;
 };
 
-export const updateProduct = async (product: Product) => {
+export const updateProduct = async (product) => {
     let photoUrl = product.photo;
 
     // Pastikan typeof === 'object' agar aman digunakan dalam instanceof
