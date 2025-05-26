@@ -25,10 +25,12 @@ export default function OrdersPage() {
     }, [])
     
     const fetchTransactions = async (status) => {
-        const { data: { user } } = await supabase.auth.getUser()
+        const { data } = await supabase.auth.getUser();
+        const user = data?.user;
+        if (!user) return;
         setLoading(true);
-        const data = await getTransactionByCustomerId(user.id, status);
-        setProducts(data);
+        const result = await getTransactionByCustomerId(user.id, status);
+        setProducts(result);
         setLoading(false);
     }
 
