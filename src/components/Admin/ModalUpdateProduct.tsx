@@ -17,25 +17,34 @@ import { getCategories } from "@/services/categoryService";
 
 export function ModalUpdateProduct({
     fetchProducts,
-    product
+    id,
+    name,
+    description,
+    price,
+    category,
+    photo
 }: {
     fetchProducts: () => void;
-    product: Product;
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    category: string | number;
+    photo: string | File;
 }) {
     const [openModal, setOpenModal] = useState(false);
+    const [categories, setCategories] = useState([]);
     const [data, setData] = useState({
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        category: product.category,
-        photo: product.photo // bisa berupa URL string atau File
+        id,
+        name,
+        description,
+        price,
+        category,
+        photo
     });
 
-    const [categories, setCategories] = useState([]);
-
     const [photoUrl, setPhotoUrl] = useState(
-        typeof product.photo === "string" ? product.photo : null
+        typeof photo === "string" ? photo : null
     );
 
     function onCloseModal() {
@@ -52,6 +61,10 @@ export function ModalUpdateProduct({
     };
 
     const handleSubmit = async () => {
+        data.category = categories.find(
+            (category) => category.name === data.category
+        )
+        console.log(data.category);
         const result = await updateProduct(data as Product);
         if (result) {
             alert("Produk berhasil diperbarui!");
@@ -72,6 +85,8 @@ export function ModalUpdateProduct({
     useEffect(() => {
         fetchCategories();
     }, []);
+
+    console.log(data);
 
     return (
         <>
@@ -141,7 +156,7 @@ export function ModalUpdateProduct({
                             </Label>
                             <Select
                                 id="category"
-                                value={data.category}
+                                value={categories.find((category) => category.id === data.category)?.id}
                                 onChange={(e) =>
                                     setData({ ...data, category: e.target.value })
                                 }

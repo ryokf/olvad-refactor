@@ -37,6 +37,7 @@ const AdminProductPage = () => {
                         <TableHeadCell>Photo</TableHeadCell>
                         <TableHeadCell>Name</TableHeadCell>
                         <TableHeadCell>Description</TableHeadCell>
+                        <TableHeadCell>Kategori</TableHeadCell>
                         <TableHeadCell>Price</TableHeadCell>
                         <TableHeadCell>Action</TableHeadCell>
                 </TableHead>
@@ -54,10 +55,11 @@ const AdminProductPage = () => {
                                 <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                                     {product.description}
                                 </TableCell>
+                                <TableCell>{product.category}</TableCell>
                                 <TableCell>{Intl.NumberFormat('id-ID').format(product.price)}</TableCell>
                                 <TableCell>
                                     <a href="#" className="font-medium text-tertiary hover:underline dark:text-cyan-500">
-                                        <ModalUpdateProduct fetchProducts={async () => await fetchProducts()} product={product}></ModalUpdateProduct>
+                                        <ModalUpdateProduct fetchProducts={async () => await fetchProducts()} id={product.id} name={product.name} description={product.description} price={product.price} category={product.category} photo={product.photo}></ModalUpdateProduct>
                                     </a>
                                     <span className="mx-2">|</span>
                                     <button onClick={async () => {await handleDelete(product.id, product.photo)}} className="font-medium text-red-600 hover:underline dark:text-red-500">
