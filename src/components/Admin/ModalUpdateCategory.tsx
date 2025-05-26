@@ -2,9 +2,9 @@
 "use client";
 
 import Category from "@/models/Category";
-import { addCategory, updateCategory } from "@/services/categoryService";
+import { updateCategory } from "@/services/categoryService";
 import { Button, Label, Modal, ModalBody, ModalHeader, TextInput } from "flowbite-react";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 export function ModalUpdateCategory({ fetchCategories, id, category }: { fetchCategories: () => void, id: number, category: string}) {
     const [openModal, setOpenModal] = useState(false);
