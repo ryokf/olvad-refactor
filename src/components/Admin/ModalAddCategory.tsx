@@ -36,7 +36,7 @@ export function ModalAddCategory({ fetchCategories }: { fetchCategories: () => v
 
     useEffect(() => {
         fetchCategories();
-    }, []);
+    }, [fetchCategories]);
 
     return (
         <>
