@@ -34,7 +34,7 @@ export const getProductById = async (id: number) => {
     return data.map(item => Product.getAll(item));
 }
 
-export const addProduct = async (product: Product) => {
+export const addProduct = async (product) => {
     // Gunakan fileName terpisah untuk path di storage
     const fileName = `${Date.now()}`;
     
