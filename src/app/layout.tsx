@@ -23,7 +23,7 @@ export default function RootLayout({
     "/admin",
     "/admin/products",
     "/admin/orders",
-    "/admin/history",
+    "/admin/category",
   ];
 
   const noNavbar = excludeNavbarAndFooter

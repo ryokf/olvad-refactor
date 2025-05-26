@@ -14,7 +14,6 @@ import {
 import { useEffect, useState } from "react";
 import Product from "@/models/Product";
 import { getCategories } from "@/services/categoryService";
-import Image from "next/image";
 
 export function ModalUpdateProduct({
     fetchProducts,
@@ -158,7 +157,7 @@ export function ModalUpdateProduct({
 
                         <div>
                             <Label className="mb-2 block" htmlFor="file-upload">
-                                Upload foto baru
+                                Upload foto baru (opsional)
                             </Label>
                             <FileInput
                                 id="file-upload"
@@ -169,9 +168,7 @@ export function ModalUpdateProduct({
 
                         {photoUrl && (
                             <div className="mt-4">
-                                <Image
-                                    width={200}
-                                    height={200}
+                                <img
                                     src={photoUrl}
                                     alt="Preview"
                                     className="w-full max-h-60 object-cover rounded-lg"
