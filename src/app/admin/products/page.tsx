@@ -19,7 +19,7 @@ const AdminProductPage = () => {
     }, [])
 
     const handleDelete = async (id: number, photoUrl: string) => {
-        const result = await deleteProduct(id, photoUrl);
+        const result = await deleteProduct(id.toString(), photoUrl);
         if (result) {
             fetchProducts();
         } else {
