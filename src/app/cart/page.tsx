@@ -35,6 +35,7 @@ const CartPage = () => {
 
     const fetchCart = async () => {
         const { data: { user } } = await supabase.auth.getUser()
+        console.log("user", user);
         const data = await getCartByCustomerId(user.id);
         const total = data.reduce((acc, item) => acc + (item.products.price * item.qty), 0);
         setTotalPrice(total);
@@ -73,6 +74,7 @@ const CartPage = () => {
         console.log("response", response);
 
         const { data: { user } } = await supabase.auth.getUser()
+        
 
         const result = await response.json();
         window.snap.pay(result.token);

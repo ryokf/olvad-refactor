@@ -36,7 +36,7 @@ export function ModalUpdateCategory({ fetchCategories, id, category }: { fetchCa
 
     return (
         <>
-            <button onClick={() => setOpenModal(true)} className="mb-6">Edit</button>
+            <button onClick={() => setOpenModal(true)} className="mb-6 text-tertiary">Edit</button>
             <Modal show={openModal} size="md" onClose={onCloseModal} popup>
                 <ModalHeader />
                 <ModalBody>
