@@ -13,3 +13,14 @@ nextjs-portal {
   display: none;
 }
 
+input.number-to-text::-webkit-outer-spin-button,
+input.number-to-text::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number].number-to-text {
+    -moz-appearance: textfield;
+}
+
+
