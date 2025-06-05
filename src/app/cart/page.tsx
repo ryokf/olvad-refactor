@@ -21,7 +21,7 @@ declare global {
 const CartPage = () => {
     const [cart, setCart] = React.useState<Cart[]>([]);
     const [totalPrice, setTotalPrice] = React.useState<number>(0);
-    
+
     useEffect(() => {
         const checkLogin = async () => {
             const { data: { user } } = await supabase.auth.getUser()
@@ -73,13 +73,13 @@ const CartPage = () => {
         console.log("response", response);
 
         const { data: { user } } = await supabase.auth.getUser()
-        
-                // const result = await response.json();
-                // window.snap.pay(result.token);
+
+        const result = await response.json();
+        window.snap.pay(result.token);
 
         await addTransaction({
             customer_id: user.id,
-            detail_order: {items : cart.map(item => ({name: item.products.name, qty: item.qty, price: item.products.price, photo: item.products.photo, product_id: item.products.id }))},
+            detail_order: { items: cart.map(item => ({ name: item.products.name, qty: item.qty, price: item.products.price, photo: item.products.photo, product_id: item.products.id })) },
             status: "processed",
             price: totalPrice
         });
