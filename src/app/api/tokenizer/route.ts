@@ -9,7 +9,7 @@ const snap = new Midtrans.Snap({
 });
 
 export async function POST(request: Request) {
-    const {price} = await request.json()
+    const { price } = await request.json()
 
     const id = new Date().getTime().toString()
 
@@ -17,6 +17,30 @@ export async function POST(request: Request) {
         transaction_details: {
             order_id: id,
             gross_amount: price
+        },
+        "customer_details": {
+            "first_name": "TEST",
+            "last_name": "UTOMO",
+            "email": "test@midtrans.com",
+            "phone": "+628123456",
+            "billing_address": {
+                "first_name": "TEST",
+                "last_name": "UTOMO",
+                "phone": "081 2233 44-55",
+                "address": "Sudirman",
+                "city": "Jakarta",
+                "postal_code": "12190",
+                "country_code": "IDN"
+            },
+            "shipping_address": {
+                "first_name": "TEST",
+                "last_name": "UTOMO",
+                "phone": "0 8128-75 7-9338",
+                "address": "Sudirman",
+                "city": "Jakarta",
+                "postal_code": "12190",
+                "country_code": "IDN"
+            }
         }
     }
 
