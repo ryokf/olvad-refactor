@@ -1,4 +1,5 @@
-import { NextRequest } from 'next/server'
+import type { NextRequest } from 'next/server'
+import type { NextApiRequestContext } from 'next'
 import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(
@@ -22,7 +23,7 @@ const supabase = createClient(
 
 export async function GET(
     request: NextRequest,
-    context: { params: Record<string, string> }
+    context: NextApiRequestContext
 ) {
     const { id } = context.params; // ambil user id dari URL path
 
