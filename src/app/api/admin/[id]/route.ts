@@ -19,8 +19,11 @@ const supabase = createClient(
 //     })
 // }
 
-export async function GET(request, { params }) {
-    const { id } = params // ambil user id dari URL path
+export async function GET(
+    request: Request,
+    context: { params: { id: string } }
+) {
+    const { id } = context.params; // ambil user id dari URL path
 
     if (!id) {
         return new Response(JSON.stringify({ error: 'User ID is required' }), { status: 400 })

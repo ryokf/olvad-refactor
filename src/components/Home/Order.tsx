@@ -1,9 +1,8 @@
 'use client'
 
-import { Button, Carousel } from 'flowbite-react'
+import { Carousel } from 'flowbite-react'
 import React, { useEffect, useState } from 'react'
 import CardComponent from '../Card';
-import buttonTheme from '@/themes/button';
 import carouselTheme from '@/themes/caraousel';
 import Product from '@/models/Product';
 import { getProductLimit } from '@/services/productService';
