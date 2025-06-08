@@ -1,3 +1,4 @@
+import { NextRequest } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(
@@ -20,8 +21,8 @@ const supabase = createClient(
 // }
 
 export async function GET(
-    request: Request,
-    context: { params: { id: string } }
+    request: NextRequest,
+    context: { params: Record<string, string> }
 ) {
     const { id } = context.params; // ambil user id dari URL path
 
