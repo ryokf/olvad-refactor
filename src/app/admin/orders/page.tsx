@@ -25,6 +25,7 @@ export default function OrdersPage() {
 
     const handleUpdate = async (id, status) => {
         await updateTransaction(id, status);
+        setStatus(status);
         fetchTransactions(status);
     }
 
@@ -33,9 +34,11 @@ export default function OrdersPage() {
         fetchTransactions(status);
     }
 
+    console.log(products)
+
     return (
         <div className="">
-            <div className="w-10/12 p-4 font-sans text-gray-800">
+            <div className="w-4/5 p-4 font-sans text-gray-800">
                 <nav className="flex mx-8 justify-center w-fit border rounded-lg border-gray-300 font-semibold text-sm select-none">
                     {filterTransaction.map(({ label, key }) => {
                         const isActive = key === status;

@@ -81,7 +81,6 @@ export class Transaction {
     }
 
     static getAll(data: Transaction): Transaction {
-        console.log("data", data);
         return new Transaction(data.id, data.createdAt, data.customer_id, data.customer, JSON.stringify(data.detail_order), data.status, data.price);
     }
 
