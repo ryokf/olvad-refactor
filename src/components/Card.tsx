@@ -8,23 +8,25 @@ import cardTheme from "@/themes/card";
 import { Badge, Card } from "flowbite-react";
 
 const CardComponent = ({ product }: { product: Product }) => {
-    console.log(product.getName());   
-
     const addCart = async () => {
         const { data: { user } } = await supabase.auth.getUser()
         const cart = await getCartByCustomerId(user?.id || "");
         const existingItem = cart.find((item) => item.products.id === product.id);
         if (existingItem) {
             await updateCart(existingItem.id, existingItem.qty + 1);
+            alert("Product added to cart");
             return;
         }
-
+        
         if (!user) {
             alert("Please login first");
             return;
         }
 
         await addToCart(user.id, product.id, 1);
+        alert("Product added to cart");
+        console.log("Product added to cart", product.id);
+
         if (!cart) return;
     }
 
