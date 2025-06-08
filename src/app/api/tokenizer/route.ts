@@ -9,9 +9,7 @@ const snap = new Midtrans.Snap({
 });
 
 export async function POST(request: Request) {
-    const { price } = await request.json()
-
-    const id = new Date().getTime().toString()
+    const { price, id } = await request.json()
 
     const parameter = {
         transaction_details: {
