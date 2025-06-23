@@ -1,38 +1,34 @@
 import { supabase } from "@/config/db";
-import Product from "@/models/Product";
+import { mapToProduct } from "@/utils/productUtils";
+
+// Fungsi untuk memproses data produk dari database
+const processProductData = (data: any[]) => {
+    return data.map(item => {
+        // Menyalin kategori dari relasi categories ke field category
+        item.category = item.categories?.category;
+        return mapToProduct(item);
+    });
+};
 
 export const getProducts = async () => {
     const { data } = await supabase.from("products").select("*, categories(*)");
-    data.forEach((item) => {
-        item.category = item.categories.category;
-    });
-    return data.map(item => Product.getAll(item));
-}
+    return processProductData(data);
+};
 
 export const getProductLimit = async (limit: number) => {
     const { data } = await supabase.from("products").select("*, categories(*)").limit(limit);
-    data.forEach((item) => {
-        item.category = item.categories.category;
-    });
-    return data.map(item => Product.getAll(item));
-}
+    return processProductData(data);
+};
 
 export const getProductsByCategory = async (categoryId: number) => {
     const { data } = await supabase.from("products").select("*, categories(*)").eq("category_id", categoryId);
-    data.forEach((item) => {
-        item.category = item.categories.category;
-    }
-    );
-    return data.map(item => Product.getAll(item));
-}
+    return processProductData(data);
+};
 
 export const getProductById = async (id: number) => {
     const { data } = await supabase.from("products").select("*, categories(*)").eq("id", id);
-    data.forEach((item) => {
-        item.category = item.categories.category;
-    });
-    return data.map(item => Product.getAll(item));
-}
+    return processProductData(data);
+};
 
 export const addProduct = async (product) => {
     // Gunakan fileName terpisah untuk path di storage

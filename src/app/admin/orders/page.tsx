@@ -17,7 +17,6 @@ export default function OrdersPage() {
     const fetchTransactions = async (status) => {
         setLoading(true);
         const data = await getTransactionByStatus(status);
-        console.log(data)
         data.map(item => item.createdAt = new Date(item.createdAt).toLocaleString());
         setProducts(data);
         setLoading(false);
@@ -33,8 +32,6 @@ export default function OrdersPage() {
         setStatus(status);
         fetchTransactions(status);
     }
-
-    console.log(products)
 
     return (
         <div className="">

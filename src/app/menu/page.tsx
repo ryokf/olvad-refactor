@@ -6,8 +6,8 @@ import React, { useEffect, useState } from 'react'
 import CardComponent from '../../components/Card';
 import { getCategories } from '@/services/categoryService';
 import { getProducts, getProductsByCategory } from '@/services/productService';
-import Product from '@/models/Product';
-import Category from '@/models/Category';
+import { Product } from '@/types/Product';
+import { Category } from '@/types/Category';
 
 const MenuPage = () => {
 
@@ -44,8 +44,8 @@ const MenuPage = () => {
                     {
                         categories.map((category) => {
                             return (
-                                <div key={category.getId()} className="">
-                                    <Button theme={buttonTheme} color='primary' onClick={() => fetchProducts(category.getId())}>{category.getCategory()}</Button>
+                                <div key={category.id} className="">
+                                    <Button theme={buttonTheme} color='primary' onClick={() => fetchProducts(category.id)}>{category.category}</Button>
                                 </div>
                             )
                         })
@@ -55,7 +55,7 @@ const MenuPage = () => {
                     {
                         products?.map((product) => {
                             return (
-                                <CardComponent key={product.getId()} product={product}/>
+                                <CardComponent key={product.id} product={product}/>
                             )
                         })
                     }

@@ -1,5 +1,5 @@
 import { supabase } from "@/config/db";
-import Cart from "@/models/Cart";
+import { mapToCart } from "@/utils/cartUtils";
 
 export const getCartByCustomerId = async (customerId: string) => {
     const { data, error } = await supabase
@@ -13,7 +13,7 @@ export const getCartByCustomerId = async (customerId: string) => {
         return [];
     }
 
-    return data.map(item => Cart.getAll(item));
+    return data.map(item => mapToCart(item));
 }
 
 export const addToCart = async (customerId: string, productId: number, qty: number) => {

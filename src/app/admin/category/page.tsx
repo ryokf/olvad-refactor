@@ -1,6 +1,6 @@
 'use client'
 
-import Category from '@/models/Category';
+import { Category } from '@/types/Category';
 import { deleteCategory, getCategories } from '@/services/categoryService';
 import { Table, TableHead } from 'flowbite-react';
 import React, { useEffect, useState } from 'react'

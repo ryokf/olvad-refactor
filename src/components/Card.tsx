@@ -2,7 +2,7 @@
 "use client";
 
 import { supabase } from "@/config/db";
-import Product from "@/models/Product";
+import { Product } from "@/types/Product";
 import { addToCart, getCartByCustomerId, updateCart } from "@/services/cartService";
 import cardTheme from "@/themes/card";
 import { Badge, Card } from "flowbite-react";
@@ -40,7 +40,7 @@ const CardComponent = ({ product }: { product: Product }) => {
             <Badge className="w-fit bg-tertiary text-white" color="success">{product.category}</Badge>
 
             <h5 className="font-semibold text-primary dark:text-white lg:mt-2">
-                {product.getName()}
+                {product.name}
             </h5>
 
             <div className="mb-2 flex items-center lg:mb-5">

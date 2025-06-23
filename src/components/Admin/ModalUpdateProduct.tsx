@@ -1,6 +1,6 @@
 "use client";
 
-import { updateProduct } from "@/services/productService"; // ganti dari addProduct
+import { updateProduct } from "@/services/productService";
 import {
     Button,
     FileInput,
@@ -12,7 +12,7 @@ import {
     TextInput
 } from "flowbite-react";
 import { useEffect, useState } from "react";
-import Product from "@/models/Product";
+import { Product } from "@/types/Product";
 import { getCategories } from "@/services/categoryService";
 import Image from "next/image";
 
@@ -62,7 +62,6 @@ export function ModalUpdateProduct({
     };
 
     const handleSubmit = async () => {
-        console.log(data.category);
         const result = await updateProduct(data as Product);
         if (result) {
             alert("Produk berhasil diperbarui!");

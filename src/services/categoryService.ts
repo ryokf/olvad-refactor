@@ -1,9 +1,10 @@
 import { supabase } from "@/config/db";
-import Category from "@/models/Category";
+import { mapToCategory } from "@/utils/categoryUtils";
+import { Category } from "@/types/Category";
 
 export const getCategories = async () => {
     const { data } = await supabase.from("categories").select("*").order("id", { ascending: true });
-    return data.map(item => Category.getAll(item));
+    return data.map(item => mapToCategory(item));
 } 
 
 export const addCategory = async (category: Category) => {

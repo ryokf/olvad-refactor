@@ -1,65 +1,49 @@
 import { supabase } from "@/config/db";
-import { Transaction } from "@/models/Transaction";
+import { mapToTransaction } from "@/utils/transactionUtils";
+import { Transaction } from "@/types/Transaction";
+
+// Fungsi untuk memproses data transaksi dengan informasi pengguna
+const processTransactionWithUserData = async (data: any[]) => {
+    const user_id = data.map(item => item.customer_id);
+    await Promise.all(user_id.map(async (id) => {
+        const userData = await fetch('/api/admin/' + id);
+        const json = await userData.json();
+        data.forEach(item => {
+            if (item.customer_id === id) {
+                item.customer = {
+                    full_name: json.user.user_metadata.full_name,
+                    email: json.user.email,
+                    phone: json.user.user_metadata.phone,
+                    avatar_url: json.user.user_metadata.avatar_url
+                };
+            }
+        });
+        return json;
+    }));
+    return data.map(item => mapToTransaction(item));
+};
 
 export const getTransactionByCustomerId = async (id: string, status?: string) => {
     if (status === "") {
         const { data } = await supabase.from("transactions").select("*").eq("customer_id", id);
-        return data.map(item => Transaction.getAll(item));
+        return data.map(item => mapToTransaction(item));
     } else {
         const { data } = await supabase.from("transactions").select("*").eq("status", status).eq("customer_id", id);
-        return data.map(item => Transaction.getAll(item));
+        return data.map(item => mapToTransaction(item));
     }
 };
 
 export const getTransactionByStatus = async (status: string) => {
     if (status === "") {
         const { data } = await supabase.from("transactions").select("*");
-
-        const user_id = data.map(item => item.customer_id);
-        await Promise.all(user_id.map(async (id) => {
-            console.log(id);
-            const userData = await fetch('/api/admin/' + id);
-            const json = await userData.json();
-            data.map(item => {
-                if (item.customer_id === id) {
-                    item.customer = {
-                        full_name: json.user.user_metadata.full_name,
-                        email: json.user.email,
-                        phone: json.user.user_metadata.phone,
-                        avatar_url: json.user.user_metadata.avatar_url
-                    }
-                }
-            });
-            return json
-        }))
-        return data.map(item => Transaction.getAll(item));
+        return processTransactionWithUserData(data);
     } else {
         const { data } = await supabase.from("transactions").select("*").eq("status", status);
-
-        const user_id = data.map(item => item.customer_id);
-        await Promise.all(user_id.map(async (id) => {
-            console.log(id);
-            const userData = await fetch('/api/admin/' + id);
-            const json = await userData.json();
-            data.map(item => {
-                if (item.customer_id === id) {
-                    item.customer = {
-                        full_name: json.user.user_metadata.full_name,
-                        email: json.user.email,
-                        phone: json.user.user_metadata.phone,
-                        avatar_url: json.user.user_metadata.avatar_url
-                    }
-                }
-            });
-            return json
-        }))
-        return data.map(item => Transaction.getAll(item));
+        return processTransactionWithUserData(data);
     }
-}
+};
 
 export const addTransaction = async (transaction) => {
-    console.log(transaction);
-
     const { data, error } = await supabase.from("transactions").insert([{
         customer_id: transaction.customer_id,
         detail_order: transaction.detail_order,

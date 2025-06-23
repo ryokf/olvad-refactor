@@ -1,10 +1,10 @@
 
 "use client";
 
-import Category from "@/models/Category";
+import { createCategory } from "@/utils/categoryUtils";
 import { updateCategory } from "@/services/categoryService";
 import { Button, Label, Modal, ModalBody, ModalHeader, TextInput } from "flowbite-react";
-import {  useState } from "react";
+import { useState } from "react";
 
 export function ModalUpdateCategory({ fetchCategories, id, category }: { fetchCategories: () => void, id: number, category: string}) {
     const [openModal, setOpenModal] = useState(false);
@@ -22,7 +22,7 @@ export function ModalUpdateCategory({ fetchCategories, id, category }: { fetchCa
     }
 
     const handleSubmit = async () => {
-        const newCategory = new Category(undefined, data.category, data.icon);
+        const newCategory = createCategory(undefined, data.category, data.icon);
         const result = await updateCategory(id, newCategory);
         if (result) {
             alert("Kategori berhasil diubah!");

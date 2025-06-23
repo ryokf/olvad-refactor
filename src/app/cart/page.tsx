@@ -1,7 +1,7 @@
 "use client"
 
 import { supabase } from '@/config/db';
-import Cart from '@/models/Cart';
+import { Cart } from '@/types/Cart';
 import { clearCart, deleteCart, getCartByCustomerId, updateCart } from '@/services/cartService';
 import { addTransaction } from '@/services/transactionService';
 import buttonTheme from '@/themes/button';
@@ -67,90 +67,112 @@ const CartPage = () => {
     }
 
     const checkout = async () => {
-        const id = new Date().getTime().toString()
-        const data = {
-            price: totalPrice,
-            id: id,
-        };
-
-        const response = await fetch("/api/tokenizer", {
-            method: "POST",
-            body: JSON.stringify(data),
-        });
-
-        console.log("response", response);
-
         const { data: { user } } = await supabase.auth.getUser()
 
-
-        const result = await response.json();
-        window.snap.pay(result.token, {
-            onSuccess: async function () {
-                // ✅ Cek ulang status transaksi
-                const statusResponse = await fetch(`/api/check-status?id=${id}`);
-                const statusData = await statusResponse.json();
-                console.log("Midtrans Status:", statusData);
-
-                if (statusData.transaction_status === "settlement" || statusData.transaction_status === "capture") {
-                    // Tambahkan transaksi ke database
-                    await addTransaction({
-                        customer_id: user.id,
-                        detail_order: {
-                            items: cart.map(item => ({
-                                name: item.products.name,
-                                qty: item.qty,
-                                price: item.products.price,
-                                photo: item.products.photo,
-                                product_id: item.products.id
-                            }))
-                        },
-                        status: "processed",
-                        price: totalPrice
-                    });
-
-                    // Kosongkan cart
-                    await clearCart(user.id);
-
-                    // Redirect ke halaman order
-                    redirect("/order");
-                } else {
-                    alert("Pembayaran belum berhasil. Silakan coba lagi.");
-                }
-            }
-            ,
-            onPending: function () {
-                alert("Anda belum menyelesaikan pembayaran, silakan selesaikan pembayaran Anda.");
-            }
-            ,
-            onError: async () => {
-                alert("Terjadi kesalahan saat memproses pembayaran, silakan coba lagi.");
-            }
-            ,
-            onClose: () => {
-                console.log("Midtrans Closed");
-                alert("Payment is closed, please try again later.");
-            }
+        await addTransaction({
+            customer_id: user.id,
+            detail_order: {
+                items: cart.map(item => ({
+                    name: item.products.name,
+                    qty: item.qty,
+                    price: item.products.price,
+                    photo: item.products.photo,
+                    product_id: item.products.id
+                }))
+            },
+            status: "processed",
+            price: totalPrice
         });
-        console.log("Midtrans Token:", result.token.split(': ')[1]);
 
-        const statusResponse = await fetch(`/api/check-status?id=${id}`);
+        // Kosongkan cart
+        await clearCart(user.id);
+
+        // Redirect ke halaman order
+        redirect("/order");
+        // const id = new Date().getTime().toString()
+        // const data = {
+        //     price: totalPrice,
+        //     id: id,
+        // };
+
+        // const response = await fetch("/api/tokenizer", {
+        //     method: "POST",
+        //     body: JSON.stringify(data),
+        // });
+
+        // console.log("response", response);
+
+        // const { data: { user } } = await supabase.auth.getUser()
 
 
-        const statusData = await statusResponse.json();
-        console.log("Midtrans Status:", statusData);
+        // const result = await response.json();
+        // window.snap.pay(result.token, {
+        //     onSuccess: async function () {
+        //         // ✅ Cek ulang status transaksi
+        //         const statusResponse = await fetch(`/api/check-status?id=${id}`);
+        //         const statusData = await statusResponse.json();
+        //         console.log("Midtrans Status:", statusData);
 
-        // if (await statusResponse.status_code == 200) {
-        //     console.log('oke');
-        //     await addTransaction({
-        //         customer_id: user.id,
-        //         detail_order: { items: cart.map(item => ({ name: item.products.name, qty: item.qty, price: item.products.price, photo: item.products.photo, product_id: item.products.id })) },
-        //         status: "processed",
-        //         price: totalPrice
-        //     });
-        //     clearCart(user.id);
-        //     redirect("/order");
-        // }
-        console.log("Checkout successful");
+        //         if (statusData.transaction_status === "settlement" || statusData.transaction_status === "capture") {
+        //             // Tambahkan transaksi ke database
+        //             await addTransaction({
+        //                 customer_id: user.id,
+        //                 detail_order: {
+        //                     items: cart.map(item => ({
+        //                         name: item.products.name,
+        //                         qty: item.qty,
+        //                         price: item.products.price,
+        //                         photo: item.products.photo,
+        //                         product_id: item.products.id
+        //                     }))
+        //                 },
+        //                 status: "processed",
+        //                 price: totalPrice
+        //             });
+
+        //             // Kosongkan cart
+        //             await clearCart(user.id);
+
+        //             // Redirect ke halaman order
+        //             redirect("/order");
+        //         } else {
+        //             alert("Pembayaran belum berhasil. Silakan coba lagi.");
+        //         }
+        //     }
+        //     ,
+        //     onPending: function () {
+        //         alert("Anda belum menyelesaikan pembayaran, silakan selesaikan pembayaran Anda.");
+        //     }
+        //     ,
+        //     onError: async () => {
+        //         alert("Terjadi kesalahan saat memproses pembayaran, silakan coba lagi.");
+        //     }
+        //     ,
+        //     onClose: () => {
+        //         console.log("Midtrans Closed");
+        //         alert("Payment is closed, please try again later.");
+        //     }
+        // });
+        // console.log("Midtrans Token:", result.token.split(': ')[1]);
+
+        // const statusResponse = await fetch(`/api/check-status?id=${id}`);
+
+
+        // const statusData = await statusResponse.json();
+        // console.log("Midtrans Status:", statusData);
+
+        // // if (await statusResponse.status_code == 200) {
+        // //     console.log('oke');
+        // //     await addTransaction({
+        // //         customer_id: user.id,
+        // //         detail_order: { items: cart.map(item => ({ name: item.products.name, qty: item.qty, price: item.products.price, photo: item.products.photo, product_id: item.products.id })) },
+        // //         status: "processed",
+        // //         price: totalPrice
+        // //     });
+        // //     clearCart(user.id);
+        // //     redirect("/order");
+        // // }
+        // console.log("Checkout successful");
 
     }
 
@@ -250,7 +272,7 @@ const CartPage = () => {
                                     placeholder="Jl. Sudirman No. 123, Bandung, Jawa Barat"
                                 />
                             </div>
-                            <div className="mb-4">
+                            {/* <div className="mb-4">
                                 <Label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="payment">
                                     Payment Method
                                 </Label>
@@ -262,7 +284,7 @@ const CartPage = () => {
                                     <option>Credit Card</option>
                                     <option>Paid on Delivery</option>
                                 </select>
-                            </div>
+                            </div> */}
                             <div className="flex justify-end">
                                 <Button
                                     theme={buttonTheme}

@@ -1,10 +1,10 @@
 
 "use client";
 
-import Category from "@/models/Category";
+import { createCategory } from "@/utils/categoryUtils";
 import { addCategory } from "@/services/categoryService";
 import { Button, Label, Modal, ModalBody, ModalHeader, TextInput } from "flowbite-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function ModalAddCategory({ fetchCategories }: { fetchCategories: () => void}) {
     const [openModal, setOpenModal] = useState(false);
@@ -22,7 +22,7 @@ export function ModalAddCategory({ fetchCategories }: { fetchCategories: () => v
     }
 
     const handleSubmit = async () => {
-        const newCategory = new Category(undefined, data.category, data.icon);
+        const newCategory = createCategory(undefined, data.category, data.icon);
         const result = await addCategory(newCategory);
         if (result) {
             alert("Kategori berhasil ditambahkan!");
@@ -34,9 +34,7 @@ export function ModalAddCategory({ fetchCategories }: { fetchCategories: () => v
         fetchCategories();
     };
 
-    useEffect(() => {
-        fetchCategories();
-    }, [fetchCategories]);
+
 
     return (
         <>
