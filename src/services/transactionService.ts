@@ -1,6 +1,5 @@
 import { supabase } from "@/config/db";
 import { mapToTransaction } from "@/utils/transactionUtils";
-import { Transaction } from "@/types/Transaction";
 
 // Fungsi untuk memproses data transaksi dengan informasi pengguna
 const processTransactionWithUserData = async (data: any[]) => {
@@ -44,25 +43,29 @@ export const getTransactionByStatus = async (status: string) => {
 };
 
 export const addTransaction = async (transaction) => {
-    const { data, error } = await supabase.from("transactions").insert([{
-        customer_id: transaction.customer_id,
-        detail_order: transaction.detail_order,
-        status: transaction.status,
-        price: transaction.price
-    }]);
-    if (error) {
+    try {
+        const { data, error } = await supabase.from("transactions").insert([{
+            customer_id: transaction.customer_id,
+            detail_order: transaction.detail_order,
+            status: transaction.status,
+            price: transaction.price
+        }]);
+        if (error) throw error;
+        return data;
+    } catch (error) {
         console.error("Error adding transaction:", error);
         return null;
     }
-    return data;
 }
 
 export const updateTransaction = async (id: number, status: string) => {
-    const { data, error } = await supabase.from("transactions").update({ status }).eq("id", id);
-    if (error) {
+    try {
+        const { data, error } = await supabase.from("transactions").update({ status }).eq("id", id);
+        if (error) throw error;
+        return data;
+    } catch (error) {
         console.error("Error updating transaction:", error);
         return null;
     }
-    return data;
 }
 

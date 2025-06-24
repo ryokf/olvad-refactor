@@ -1,12 +1,9 @@
 "use client"
 
 import { poppins, sourGummy } from '@/themes/fonts';
-import textInputTheme from '@/themes/text_input';
 import { useGSAP } from '@gsap/react'
-import { TextInput } from 'flowbite-react';
 import gsap from 'gsap';
-import React, { useRef } from 'react'
-import { IoSearch } from "react-icons/io5";
+import { useRef } from 'react'
 import BakeryShop from '../3D_model/BakeryShop';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';

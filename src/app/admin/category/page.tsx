@@ -3,7 +3,7 @@
 import { Category } from '@/types/Category';
 import { deleteCategory, getCategories } from '@/services/categoryService';
 import { Table, TableHead } from 'flowbite-react';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TableBody, TableCell, TableHeadCell, TableRow } from "flowbite-react";
 import { ModalAddCategory } from '../../../components/Admin/ModalAddCategory';
 import { ModalUpdateCategory } from '@/components/Admin/ModalUpdateCategory';

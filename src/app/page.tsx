@@ -11,9 +11,7 @@ export default function Home() {
 
   return (
     <>
-      {/* <Suspense fallback={<div className="min-h-screen"></div>}> */}
-        <Hero />
-      {/* </Suspense> */}
+      <Hero />
       <Order></Order>
       <About></About>
       <Reviews></Reviews>

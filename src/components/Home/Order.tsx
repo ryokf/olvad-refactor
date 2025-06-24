@@ -1,7 +1,7 @@
 'use client'
 
 import { Carousel } from 'flowbite-react'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import CardComponent from '../Card';
 import carouselTheme from '@/themes/caraousel';
 import Product from '@/models/Product';

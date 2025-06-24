@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Button, Navbar } from "flowbite-react";
 import Image from "next/image";
 import { supabase } from "@/config/db";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { User } from "@supabase/supabase-js";
 import { navLink } from "@/constant/NavLink";
 import buttonTheme from "@/themes/button";
@@ -14,19 +14,29 @@ import { navbarTheme } from "@/themes/navbar";
 export function NavbarComponent() {
     const [user, setUser] = useState<User | null>(null);
 
-    const getUser = async () => {
+    const getUser = useCallback(async () => {
         const { data: { user } } = await supabase.auth.getUser();
         setUser(user);
-    };
+    }, []);
 
-    const handleLogout = async () => {
+    const handleLogout = useCallback(async () => {
         await supabase.auth.signOut();
-        document.location.reload();
-    };
+        window.location.reload();
+    }, []);
 
     useEffect(() => {
         getUser();
-    }, []);
+        
+        // Menambahkan listener untuk perubahan auth state
+        const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
+            getUser();
+        });
+        
+        // Cleanup subscription saat komponen unmount
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, [getUser]);
 
     return (
         <div className="relative md:fixed w-full z-[999]">

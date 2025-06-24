@@ -2,7 +2,7 @@
 
 import buttonTheme from '@/themes/button';
 import { Button } from 'flowbite-react';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import CardComponent from '../../components/Card';
 import { getCategories } from '@/services/categoryService';
 import { getProducts, getProductsByCategory } from '@/services/productService';

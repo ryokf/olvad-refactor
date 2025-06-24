@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { SidebarComponent } from '../../components/Admin/Sidebar';
 import { supabase } from '@/config/db';
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
-    const [allowed, setAllowed] = React.useState(false);
+    const [allowed, setAllowed] = useState(false);
 
     useEffect(() => {
         const checkAdmin = async () => {
@@ -17,7 +17,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
             }
         }
         checkAdmin();
-    })
+    }, []) // Dependency array kosong untuk memastikan useEffect hanya dijalankan sekali
 
     return (
         <div className="min-h-screen w-full">

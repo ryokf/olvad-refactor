@@ -12,7 +12,7 @@ export default function OrdersPage() {
 
     useEffect(() => {
         fetchTransactions(status)
-    }, [])
+    }, [status]) // Menambahkan status ke dependency array untuk memastikan fetchTransactions dipanggil ketika status berubah
 
     const fetchTransactions = async (status) => {
         setLoading(true);
@@ -30,7 +30,7 @@ export default function OrdersPage() {
 
     function handleClick(status) {
         setStatus(status);
-        fetchTransactions(status);
+        // fetchTransactions akan dipanggil oleh useEffect ketika status berubah
     }
 
     return (

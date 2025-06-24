@@ -9,20 +9,18 @@ import { useState } from "react";
 export function ModalUpdateCategory({ fetchCategories, id, category }: { fetchCategories: () => void, id: number, category: string}) {
     const [openModal, setOpenModal] = useState(false);
     const [data, setData] = useState({
-        category,
-        icon : null
+        category
     });
 
     function onCloseModal() {
         setOpenModal(false);
         setData({
-            category: "", 
-            icon : null
+            category: ""
         });
     }
 
     const handleSubmit = async () => {
-        const newCategory = createCategory(undefined, data.category, data.icon);
+        const newCategory = createCategory(undefined, data.category, null);
         const result = await updateCategory(id, newCategory);
         if (result) {
             alert("Kategori berhasil diubah!");

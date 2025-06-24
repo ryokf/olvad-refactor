@@ -3,7 +3,6 @@
 import { signInWithGoogle } from '@/services/auth'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation';
-import React from 'react'
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname();

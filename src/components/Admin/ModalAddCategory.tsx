@@ -9,20 +9,18 @@ import { useState } from "react";
 export function ModalAddCategory({ fetchCategories }: { fetchCategories: () => void}) {
     const [openModal, setOpenModal] = useState(false);
     const [data, setData] = useState({
-        category: "",
-        icon : null
+        category: ""
     });
 
     function onCloseModal() {
         setOpenModal(false);
         setData({
-            category: "", 
-            icon : null
+            category: ""
         });
     }
 
     const handleSubmit = async () => {
-        const newCategory = createCategory(undefined, data.category, data.icon);
+        const newCategory = createCategory(undefined, data.category, null);
         const result = await addCategory(newCategory);
         if (result) {
             alert("Kategori berhasil ditambahkan!");

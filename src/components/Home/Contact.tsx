@@ -1,4 +1,3 @@
-import React from 'react'
 import { FaHome, FaPhoneAlt } from 'react-icons/fa'
 import { FaSquareInstagram } from 'react-icons/fa6'
 import { MdEmail } from 'react-icons/md'

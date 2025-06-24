@@ -2,70 +2,75 @@ import { supabase } from "@/config/db";
 import { mapToCart } from "@/utils/cartUtils";
 
 export const getCartByCustomerId = async (customerId: string) => {
-    const { data, error } = await supabase
-        .from("carts")
-        .select("*, products(*)")
-        .eq("customer_id", customerId)
-        .order("created_at", { ascending: false });
+    try {
+        const { data, error } = await supabase
+            .from("carts")
+            .select("*, products(*)")
+            .eq("customer_id", customerId)
+            .order("created_at", { ascending: false });
 
-    if (error) {
+        if (error) throw error;
+        return data.map(item => mapToCart(item));
+    } catch (error) {
         console.error("Error fetching cart:", error);
         return [];
     }
-
-    return data.map(item => mapToCart(item));
 }
 
 export const addToCart = async (customerId: string, productId: number, qty: number) => {
-    const { data, error } = await supabase
-        .from("carts")
-        .insert([
-            { customer_id: customerId, product_id: productId, qty }
-        ]);
+    try {
+        const { data, error } = await supabase
+            .from("carts")
+            .insert([
+                { customer_id: customerId, product_id: productId, qty }
+            ]);
 
-    if (error) {
+        if (error) throw error;
+        return data;
+    } catch (error) {
         console.error("Error adding to cart:", error);
         return null;
     }
-
-    return data;
 }
 export const updateCart = async (cartId: number, qty: number) => {
-    const { data, error } = await supabase
-        .from("carts")
-        .update({ qty })
-        .eq("id", cartId);
+    try {
+        const { data, error } = await supabase
+            .from("carts")
+            .update({ qty })
+            .eq("id", cartId);
 
-    if (error) {
+        if (error) throw error;
+        return data;
+    } catch (error) {
         console.error("Error updating cart:", error);
         return null;
     }
-
-    return data;
 }
 export const deleteCart = async (cartId: number) => {
-    const { data, error } = await supabase
-        .from("carts")
-        .delete()
-        .eq("id", cartId);
+    try {
+        const { data, error } = await supabase
+            .from("carts")
+            .delete()
+            .eq("id", cartId);
 
-    if (error) {
+        if (error) throw error;
+        return data;
+    } catch (error) {
         console.error("Error deleting cart:", error);
         return null;
     }
-
-    return data;
 }
 export const clearCart = async (customerId: string) => {
-    const { data, error } = await supabase
-        .from("carts")
-        .delete()
-        .eq("customer_id", customerId);
+    try {
+        const { data, error } = await supabase
+            .from("carts")
+            .delete()
+            .eq("customer_id", customerId);
 
-    if (error) {
+        if (error) throw error;
+        return data;
+    } catch (error) {
         console.error("Error clearing cart:", error);
         return null;
     }
-
-    return data;
 }

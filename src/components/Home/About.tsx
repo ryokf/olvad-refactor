@@ -1,10 +1,10 @@
 "use client"
 
-import React, { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { ScrollTrigger } from 'gsap/all';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { sourGummy } from '@/themes/fonts';
 import CountUp from 'react-countup';
 
@@ -15,34 +15,37 @@ const About = () => {
     const [isCountUpVisible, setIsCountUpVisible] = useState(false);
 
     useEffect(() => {
-        setIsCountUpVisible(true);
+        // Menggunakan requestAnimationFrame untuk memastikan state diperbarui setelah render
+        const timer = requestAnimationFrame(() => {
+            setIsCountUpVisible(true);
+        });
+        return () => cancelAnimationFrame(timer);
     }, []);
 
     gsap.registerPlugin(ScrollTrigger);
 
     useGSAP(() => {
-        const tlOutline = gsap.timeline({
-            scrollTrigger: contentRef.current, // start the timeline animation when ".container" enters the viewport (once)
+        // Menggunakan satu timeline untuk kedua animasi untuk meningkatkan performa
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: contentRef.current,
+                start: "top bottom",
+                toggleActions: "play none none none"
+            }
         });
 
-        tlOutline.from(contentRef.current, {
+        tl.from(contentRef.current, {
             scale: 0,
             opacity: 0,
             duration: 1,
             ease: "power4.out"
-        })
-
-        const tlContent = gsap.timeline({
-            scrollTrigger: contentRef.current, // start the timeline animation when ".container" enters the viewport (once)
-        });
-
-        tlContent.from(outlineTextRef.current, {
+        }).from(outlineTextRef.current, {
             opacity: 0,
             x: -100,
             duration: 1,
             ease: "power4.out"
-        })
-    });
+        }, "-=0.5"); // Mulai sedikit lebih awal untuk animasi yang lebih mulus
+    }, []);
 
     return (
         <div className="h-screen w-10/12 mx-auto relative flex justify-center items-center mt-20 lg:max-w-7xl">

@@ -3,7 +3,7 @@
 import { registerWithEmail } from '@/services/auth'
 import buttonTheme from '@/themes/button'
 import { Button, Label, TextInput } from 'flowbite-react'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const RegisterPage = () => {
     const [name, setName] = useState("")

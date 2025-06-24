@@ -1,8 +1,8 @@
-'use client';
+'use client'
 
-import { useEffect, useState } from "react";
-import { supabase } from "@/config/db";
-import { User } from "@supabase/supabase-js";
+import { useEffect, useState } from 'react'
+import { supabase } from '@/config/db'
+import { User } from '@supabase/supabase-js'
 import Image from "next/image";
 
 export default function ProfilePage() {
@@ -21,8 +21,6 @@ export default function ProfilePage() {
         return <p>Loading...</p>;
     }
 
-    console.log(user);
-
     return (
         <div className="mx-auto max-w-7xl p-4 pt-6 sm:p-6 lg:p-8 min-h-96 flex justify-center items-center">
             <div className="my-32">
@@ -33,8 +31,6 @@ export default function ProfilePage() {
                     <div className="ml-4">
                         <p className="text-xl text-center font-semibold text-primary">{user.user_metadata.full_name}</p>
                         <p className="text-center mb-4 text-secondary">{user.email}</p>
-                        {/* <p className="text-xl">Email Verified: {user.user_metadata.email_verified ? "Yes" : "No"}</p>
-                    <p className="text-xl">Phone Verified: {user.user_metadata.phone ? "Yes" : "No"}</p> */}
                     </div>
                 </div>
                 <div className="flex justify-center gap-4">

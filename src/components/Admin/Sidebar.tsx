@@ -2,10 +2,11 @@
 "use client";
 
 import { Sidebar, SidebarItem, SidebarItemGroup, SidebarItems, SidebarLogo } from "flowbite-react";
-import {  HiChartPie,  } from "react-icons/hi";
+import { HiChartPie } from "react-icons/hi";
 import { usePathname } from 'next/navigation';
 import { RiBreadLine } from "react-icons/ri";
 import { MdOutlineCategory, MdOutlineShoppingCart } from "react-icons/md";
+import { LuFileInput, LuFileOutput } from "react-icons/lu";
 
 export function SidebarComponent() {
     const pathname = usePathname();
@@ -25,11 +26,17 @@ export function SidebarComponent() {
                     <SidebarItem href="/admin/products" icon={RiBreadLine} labelColor="dark" active={isActive("/admin/products")}>
                         Products
                     </SidebarItem>
-                    <SidebarItem href="/admin/category" icon={MdOutlineCategory} labelColor="dark" active={isActive("/admin")}>
+                    <SidebarItem href="/admin/category" icon={MdOutlineCategory} labelColor="dark" active={isActive("/admin/category")}>
                         Category
                     </SidebarItem>
                     <SidebarItem href="/admin/orders" icon={MdOutlineShoppingCart} active={isActive("/admin/orders")} labelColor="dark">
                         Order
+                    </SidebarItem>
+                    <SidebarItem href="/admin/expenses" icon={LuFileOutput} labelColor="dark" active={isActive("/admin/finance")}>
+                        Pengeluaran
+                    </SidebarItem>
+                    <SidebarItem href="/admin/incomes" icon={LuFileInput} labelColor="dark" active={isActive("/admin/incomes")}>
+                        Pemasukan
                     </SidebarItem>
                 </SidebarItemGroup>
             </SidebarItems>

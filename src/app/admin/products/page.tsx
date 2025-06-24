@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from "flowbite-react";
 import { deleteProduct, getProducts } from '@/services/productService';
 import Image from 'next/image';
@@ -8,13 +8,13 @@ import { ModalAddProduct } from '../../../components/Admin/ModalAddProduct';
 import { ModalUpdateProduct } from '../../../components/Admin/ModalUpdateProduct';
 
 const AdminProductPage = () => {
-    const [products, setProducts] = React.useState([]);
+    const [products, setProducts] = useState([]);
     const fetchProducts = async () => {
         const products = await getProducts();
         setProducts(products);
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         fetchProducts();
     }, [])
 
@@ -27,7 +27,7 @@ const AdminProductPage = () => {
         }
     }
 
-    console.log(products);
+
     return (
         <div className="overflow-x-auto w-4/5 mx-10 mb-20">
             <ModalAddProduct fetchProducts={async () => await fetchProducts()}></ModalAddProduct>
