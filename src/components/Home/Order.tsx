@@ -4,8 +4,8 @@ import { Carousel } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 import CardComponent from '../Card';
 import carouselTheme from '@/themes/caraousel';
-import Product from '@/models/Product';
 import { getProductLimit } from '@/services/productService';
+import { Product } from '@/types/Product';
 
 const Order = () => {
 
