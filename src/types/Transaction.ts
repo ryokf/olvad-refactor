@@ -4,6 +4,7 @@ export interface Items {
     qty: number;
     name: string;
     price: number;
+    photo: string;
 }
 
 export interface DetailOrder {
