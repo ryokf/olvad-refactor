@@ -362,7 +362,7 @@ const PengeluaranPage = () => {
                   onChange={(e) => {
                     const file = e.target.files?.[0];
                     if (file) {
-                      setCurrentExpense(prev => ({ ...prev, invoice: file }));
+                      setCurrentExpense(prev => ({ ...prev, invoice: file as unknown as string }));
                     }
                   }}
                 />
