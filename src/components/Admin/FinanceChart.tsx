@@ -215,9 +215,33 @@ const FinanceChart = () => {
           <p className="text-gray-500">Memuat data...</p>
         </div>
       ) : (
-        <div className="h-full flex justify-center items-center">
-          <Line options={options} data={chartData} />
-        </div>
+        <>
+          <div className="mb-4 grid grid-cols-2 gap-4">
+            <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+              <p className="text-sm text-gray-600">Total Pemasukan:</p>
+              <p className="text-xl font-bold text-green-600">
+                {new Intl.NumberFormat('id-ID', {
+                  style: 'currency',
+                  currency: 'IDR',
+                  minimumFractionDigits: 0
+                }).format(totalIncome)}
+              </p>
+            </div>
+            <div className="p-4 bg-red-50 rounded-lg border border-red-200">
+              <p className="text-sm text-gray-600">Total Pengeluaran:</p>
+              <p className="text-xl font-bold text-red-600">
+                {new Intl.NumberFormat('id-ID', {
+                  style: 'currency',
+                  currency: 'IDR',
+                  minimumFractionDigits: 0
+                }).format(totalExpense)}
+              </p>
+            </div>
+          </div>
+          <div className="h-full flex justify-center items-center">
+            <Line options={options} data={chartData} />
+          </div>
+        </>
       )}
     </div>
   );

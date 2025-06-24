@@ -4,17 +4,18 @@ import Image from "next/image";
 import { getTransactionByStatus, updateTransaction } from "@/services/transactionService";
 import { useEffect, useState } from "react";
 import { filterTransaction } from "@/constant/FilterTransaction";
+import { OrderStatus, Transaction } from "@/types/Transaction";
 
 export default function OrdersPage() {
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState<Transaction[]>([]);
     const [loading, setLoading] = useState(false);
-    const [status, setStatus] = useState("processed");
+    const [status, setStatus] = useState<OrderStatus>("processed");
 
     useEffect(() => {
         fetchTransactions(status)
     }, [status]) // Menambahkan status ke dependency array untuk memastikan fetchTransactions dipanggil ketika status berubah
 
-    const fetchTransactions = async (status) => {
+    const fetchTransactions = async (status: OrderStatus) => {
         setLoading(true);
         const data = await getTransactionByStatus(status);
         data.map(item => item.createdAt = new Date(item.createdAt).toLocaleString());
@@ -22,13 +23,13 @@ export default function OrdersPage() {
         setLoading(false);
     }
 
-    const handleUpdate = async (id, status) => {
+    const handleUpdate = async (id: number, status: OrderStatus) => {
         await updateTransaction(id, status);
         setStatus(status);
         fetchTransactions(status);
     }
 
-    function handleClick(status) {
+    function handleClick(status: OrderStatus) {
         setStatus(status);
         // fetchTransactions akan dipanggil oleh useEffect ketika status berubah
     }

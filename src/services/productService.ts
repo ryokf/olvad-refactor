@@ -1,8 +1,23 @@
 import { supabase } from "@/config/db";
 import { mapToProduct } from "@/utils/productUtils";
 
+// Import tipe Product tidak diperlukan di sini
+
+// Definisi interface untuk data produk dari database
+interface ProductData {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    photo: string;
+    category_id: number;
+    categories?: {
+        category: string;
+    };
+}
+
 // Fungsi untuk memproses data produk dari database
-const processProductData = (data: any[]) => {
+const processProductData = (data: ProductData[]) => {
     return data.map(item => {
         // Menyalin kategori dari relasi categories ke field category
         item.category = item.categories?.category;

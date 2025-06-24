@@ -54,7 +54,7 @@ const IncomesPage = () => {
         created_at: currentIncome.created_at || new Date().toISOString(),
       };
 
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('incomes')
         .insert([newIncome])
         .select();

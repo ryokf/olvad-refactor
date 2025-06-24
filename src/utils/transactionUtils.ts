@@ -21,8 +21,26 @@ export const createTransaction = (
     };
 };
 
+// Definisi interface untuk data transaksi dari database
+interface TransactionData {
+    id: number;
+    createdAt?: string;
+    created_at?: string;
+    customer_id: string;
+    customer?: Customer;
+    detail_order: {
+        items: {
+            qty: number;
+            name: string;
+            price: number;
+        }[];
+    };
+    status: OrderStatus;
+    price: number;
+}
+
 // Fungsi untuk mengkonversi data mentah menjadi objek Transaction
-export const mapToTransaction = (data: any): Transaction => {
+export const mapToTransaction = (data: TransactionData): Transaction => {
     return {
         id: data.id,
         createdAt: data.createdAt || data.created_at || new Date().toISOString(),

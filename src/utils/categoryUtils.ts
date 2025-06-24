@@ -5,8 +5,15 @@ export const createCategory = (id: number, category: string, icon: string | null
     return { id, category, icon };
 };
 
+// Definisi interface untuk data kategori dari database
+interface CategoryData {
+    id: number;
+    category: string;
+    icon: string | null;
+}
+
 // Fungsi untuk mengkonversi data mentah menjadi objek Category
-export const mapToCategory = (data: any): Category => {
+export const mapToCategory = (data: CategoryData): Category => {
     return {
         id: data.id,
         category: data.category,

@@ -1,8 +1,27 @@
 import { supabase } from "@/config/db";
 import { mapToTransaction } from "@/utils/transactionUtils";
 
+import { Customer } from '@/types/Transaction';
+
+// Definisi interface untuk data transaksi dari database
+interface TransactionData {
+    id: number;
+    customer_id: string;
+    detail_order: {
+        items: {
+            qty: number;
+            name: string;
+            price: number;
+        }[];
+    };
+    status: string;
+    price: number;
+    created_at: string;
+    customer?: Customer;
+}
+
 // Fungsi untuk memproses data transaksi dengan informasi pengguna
-const processTransactionWithUserData = async (data: any[]) => {
+const processTransactionWithUserData = async (data: TransactionData[]) => {
     const user_id = data.map(item => item.customer_id);
     await Promise.all(user_id.map(async (id) => {
         const userData = await fetch('/api/admin/' + id);

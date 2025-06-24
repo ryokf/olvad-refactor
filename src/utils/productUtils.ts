@@ -5,8 +5,18 @@ export const createProduct = (id: number, name: string, category: string, price:
     return { id, name, category, price, description, photo };
 };
 
+// Definisi interface untuk data produk dari database
+interface ProductData {
+    id: number;
+    name: string;
+    category: string;
+    price: number;
+    description: string;
+    photo: string;
+}
+
 // Fungsi untuk mengkonversi data mentah menjadi objek Product
-export const mapToProduct = (data: any): Product => {
+export const mapToProduct = (data: ProductData): Product => {
     return {
         id: data.id,
         name: data.name,

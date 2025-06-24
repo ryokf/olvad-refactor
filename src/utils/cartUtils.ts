@@ -12,8 +12,17 @@ export const createCart = (id: number, customerId: number, products: Product, qt
     };
 };
 
+// Definisi interface untuk data cart dari database
+interface CartData {
+    id: number;
+    customer_id: number;
+    products: Product;
+    qty: number;
+    created_at: string;
+}
+
 // Fungsi untuk mengkonversi data mentah menjadi objek Cart
-export const mapToCart = (data: any): Cart => {
+export const mapToCart = (data: CartData): Cart => {
     return {
         id: data.id,
         customer_id: data.customer_id,

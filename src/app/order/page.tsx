@@ -22,7 +22,7 @@ export default function OrdersPage() {
     
     useEffect(() => {
         fetchTransactions(active)
-    }, [])
+    }, [active])
     
     const fetchTransactions = async (status) => {
         const { data } = await supabase.auth.getUser();

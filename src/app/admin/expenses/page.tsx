@@ -81,7 +81,7 @@ const PengeluaranPage = () => {
 
       console.log(newExpense)
 
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('expenses')
         .insert([newExpense])
         .select();
